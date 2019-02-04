@@ -1,0 +1,2237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zabbix_export>
+
+    <version>3.4</version>
+
+    <date>2018-09-26T10:19:43Z</date>
+
+    <groups>
+
+        <group>
+
+            <name>My Templates</name>
+
+        </group>
+
+    </groups>
+
+    <templates>
+
+        <template>
+
+            <template>Template AD DS Monitoring and Attack Detection</template>
+
+            <name>Template AD DS Monitoring and Attack Detection</name>
+
+            <description/>
+
+            <groups>
+
+                <group>
+
+                    <name>My Templates</name>
+
+                </group>
+
+            </groups>
+
+            <applications>
+
+                <application>
+
+                    <name>Security events</name>
+
+                </application>
+
+            </applications>
+
+            <items>
+
+                <item>
+
+                    <name>Windows Security (ID1102)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^1102$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>The audit log was cleared.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4618)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4618$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>A monitored security event pattern has occurred.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4621)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4621$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Administrator recovered system from CrashOnAuditFail. Users who are not administrators will now be allowed to log on. Some auditable activity might not have been recorded.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4649)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4649$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>A replay attack was detected. May be a harmless false positive due to misconfiguration error.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4675)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4675$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>SIDs were filtered.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4692)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4692$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Backup of data protection master key was attempted.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4693)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4693$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Recovery of data protection master key was attempted.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4706)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4706$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>A new trust was created to a domain.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4713)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4713$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Kerberos policy was changed.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4714)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4714$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Encrypted data recovery policy was changed.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4715)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4715$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>The audit policy (SACL) on an object was changed.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4716)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4716$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Trusted domain information was modified.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4719)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4719$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>System audit policy was changed.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4765)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4765$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>SID History was added to an account.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4766)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4766$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>An attempt to add SID History to an account failed.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4794)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4794$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>An attempt was made to set the Directory Services Restore Mode.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4897)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4897$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Role separation enabled.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID4964)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^4964$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>Special groups have been assigned to a new logon.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+                <item>
+
+                    <name>Windows Security (ID5124)</name>
+
+                    <type>7</type>
+
+                    <snmp_community/>
+
+                    <snmp_oid/>
+
+                    <key>eventlog[Security,,,,^5124$]</key>
+
+                    <delay>5m</delay>
+
+                    <history>1w</history>
+
+                    <trends>0</trends>
+
+                    <status>0</status>
+
+                    <value_type>2</value_type>
+
+                    <allowed_hosts/>
+
+                    <units/>
+
+                    <snmpv3_contextname/>
+
+                    <snmpv3_securityname/>
+
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+
+                    <snmpv3_authpassphrase/>
+
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+
+                    <snmpv3_privpassphrase/>
+
+                    <params/>
+
+                    <ipmi_sensor/>
+
+                    <authtype>0</authtype>
+
+                    <username/>
+
+                    <password/>
+
+                    <publickey/>
+
+                    <privatekey/>
+
+                    <port/>
+
+                    <description>A security setting was updated on the OCSP Responder Service.</description>
+
+                    <inventory_link>0</inventory_link>
+
+                    <applications>
+
+                        <application>
+
+                            <name>Security events</name>
+
+                        </application>
+
+                    </applications>
+
+                    <valuemap/>
+
+                    <logtimefmt/>
+
+                    <preprocessing/>
+
+                    <jmx_endpoint/>
+
+                    <master_item/>
+
+                </item>
+
+            </items>
+
+            <discovery_rules/>
+
+            <httptests/>
+
+            <macros/>
+
+            <templates/>
+
+            <screens/>
+
+        </template>
+
+    </templates>
+
+    <triggers>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4621$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4621$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Administrator recovered system from CrashOnAuditFail.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>Administrator recovered system from CrashOnAuditFail. Users who are not administrators will now be allowed to log on. Some auditable activity might not have been recorded.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4618$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4618$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>A monitored security event pattern has occurred.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>A monitored security event pattern has occurred.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4766$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4766$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>An attempt to add SID History to an account failed.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>An attempt to add SID History to an account failed.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4794$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4794$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>An attempt was made to set the Directory Services Restore Mode.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>An attempt was made to set the Directory Services Restore Mode.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4706$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4706$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>A new trust was created to a domain.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>A new trust was created to a domain.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4649$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4649$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>A replay attack was detected. May be a harmless false positive due to misconfiguration error.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>A replay attack was detected. May be a harmless false positive due to misconfiguration error.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^5124$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^5124$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>A security setting was updated on the OCSP Responder Service</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>A security setting was updated on the OCSP Responder Service</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4692$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4692$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Backup of data protection master key was attempted.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>Backup of data protection master key was attempted.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4714$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4714$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Encrypted data recovery policy was changed.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>Encrypted data recovery policy was changed.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4713$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4713$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Kerberos policy was changed.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>Kerberos policy was changed.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4693$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4693$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Recovery of data protection master key was attempted.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>Backup of data protection master key was attempted.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4897$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4897$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Role separation enabled.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>Role separation enabled.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4765$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4765$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>SID History was added to an account.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>SID History was added to an account.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4675$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4675$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>SIDs were filtered.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>SIDs were filtered.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4964$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4964$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Special groups have been assigned to a new logon.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>Special groups have been assigned to a new logon.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4719$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4719$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>System audit policy was changed.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>System audit policy was changed.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^1102$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^1102$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>The audit log was cleared.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>4</priority>
+
+            <description>The audit log was cleared.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4715$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4715$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>The audit policy (SACL) on an object was changed.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>The audit policy (SACL) on an object was changed.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+        <trigger>
+
+            <expression>{Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4716$].logseverity(0)}&gt;1 and {Template AD DS Monitoring and Attack Detection:eventlog[Security,,,,^4716$].nodata(600)}=0</expression>
+
+            <recovery_mode>0</recovery_mode>
+
+            <recovery_expression/>
+
+            <name>Trusted domain information was modified.</name>
+
+            <correlation_mode>0</correlation_mode>
+
+            <correlation_tag/>
+
+            <url/>
+
+            <status>0</status>
+
+            <priority>3</priority>
+
+            <description>Trusted domain information was modified.</description>
+
+            <type>0</type>
+
+            <manual_close>0</manual_close>
+
+            <dependencies/>
+
+            <tags/>
+
+        </trigger>
+
+    </triggers>
+
+</zabbix_export>
