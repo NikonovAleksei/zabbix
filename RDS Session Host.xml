@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2019-02-01T08:08:57Z</date>
+    <date>2019-02-26T05:32:48Z</date>
     <groups>
         <group>
             <name>My Templates</name>
@@ -13,9 +13,6 @@
             <name>Template Windows 2012 R2 RDS Session</name>
             <description/>
             <groups>
-                <group>
-                    <name>ADM-102</name>
-                </group>
                 <group>
                     <name>My Templates</name>
                 </group>
@@ -71,6 +68,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -112,6 +127,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -153,6 +186,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -194,6 +245,83 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
+                </item>
+                <item>
+                    <name>RDS Inactive sessions</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>perf_counter[\1920\1924]</key>
+                    <delay>1m</delay>
+                    <history>1w</history>
+                    <trends>365d</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>perf_counter[\Terminal Service\Inactive Sessions]</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>RDS</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -235,6 +363,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -278,6 +424,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
@@ -371,7 +535,7 @@
             <expression>{Template Windows 2012 R2 RDS Session:eventlog[Microsoft-Windows-TerminalServices-LocalSessionManager/Operational,,&quot;Information&quot;,,^21$].logeventid(21)}=1 and {Template Windows 2012 R2 RDS Session:eventlog[Microsoft-Windows-TerminalServices-LocalSessionManager/Operational,,&quot;Information&quot;,,^21$].nodata(60)}=0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>User ( {{ITEM.VALUE}.iregsub(&quot;(\w.+[: {$DOMAIN}].*)&quot;,&quot;\1&quot;)}) logon succeeded to RDS on {HOST.NAME}</name>
+            <name>User ( {{ITEM.VALUE}.iregsub(&quot;(\w.+[: {$DOMAIN}].*)&quot;,&quot;\1&quot;)}) logon succeeded in RDS on {HOST.NAME}</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -417,7 +581,7 @@
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <drawtype>0</drawtype>
+                    <drawtype>3</drawtype>
                     <color>F63100</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>2</calc_fnc>
@@ -425,6 +589,18 @@
                     <item>
                         <host>Template Windows 2012 R2 RDS Session</host>
                         <key>perf_counter[\1920\1926]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>0</drawtype>
+                    <color>2774A4</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template Windows 2012 R2 RDS Session</host>
+                        <key>perf_counter[\1920\1924]</key>
                     </item>
                 </graph_item>
             </graph_items>
