@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-05-18T09:18:31Z</date>
+    <groups>
+        <group>
+            <name>My Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Windows 2012 R2 RDS Gateway</template>
+            <name>Template Windows 2012 R2 RDS Gateway</name>
+            <groups>
+                <group>
+                    <name>My Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>RDS</name>
+                </application>
+                <application>
+                    <name>RDS Events</name>
+                </application>
+                <application>
+                    <name>Services</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>The user did not meet connection authorization policy requirements</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>eventlog[Microsoft-Windows-TerminalServices-Gateway/Operational,,&quot;Error&quot;,,^201$]</key>
+                    <delay>30s</delay>
+                    <trends>0</trends>
+                    <value_type>LOG</value_type>
+                    <applications>
+                        <application>
+                            <name>RDS Events</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{logeventid(201)}=1 and {nodata(60)}=0</expression>
+                            <name>The user ( {{ITEM.VALUE}.iregsub(&quot;(\w.+[: {$DOMAIN}].*)&quot;,&quot;\1&quot;)}), on &quot;{HOST.NAME}&quot;, RDS didn't allow connection</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>RDS GW Port</name>
+                    <key>net.tcp.listen[{$RDS.GW.PORT}]</key>
+                    <delay>30s</delay>
+                    <applications>
+                        <application>
+                            <name>RDS</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(,0)}=0</expression>
+                            <name>RDS GW Port is down on {HOST.NAME}</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>RDS Current sessions</name>
+                    <key>perf_counter[\Terminal Service Gateway\Current connections]</key>
+                    <delay>5m</delay>
+                    <description>perf_counter[\8676\8682]</description>
+                    <applications>
+                        <application>
+                            <name>RDS</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>State of service &quot;IAS&quot; (Network Policy Server)</name>
+                    <key>service_state[IAS]</key>
+                    <history>1d</history>
+                    <description>To resolve this issue, ensure that the Network Policy Server service is started.</description>
+                    <applications>
+                        <application>
+                            <name>Services</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(#3)}&lt;&gt;0</expression>
+                            <name>Service &quot;IAS&quot; (Network Policy Server) is not running</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>State of service &quot;RPCHTTPLBS&quot; (RPC/HTTP Load Balancing Service)</name>
+                    <key>service_state[RPCHTTPLBS]</key>
+                    <history>1d</history>
+                    <applications>
+                        <application>
+                            <name>Services</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(#3)}&lt;&gt;0</expression>
+                            <name>Service &quot;RPCHTTPLBS&quot; (RPC/HTTP Load Balancing Service) is not running</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>State of service &quot;TSGateway&quot; (Remote Desktop Gateway)</name>
+                    <key>service_state[TSGateway]</key>
+                    <history>1d</history>
+                    <description>To resolve this issue, restart the Remote Desktop Gateway service. Restarting the Remote Desktop Gateway service also restarts all dependent services.</description>
+                    <applications>
+                        <application>
+                            <name>Services</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(#3)}&lt;&gt;0</expression>
+                            <name>Service &quot;TSGateway&quot; (Remote Desktop Gateway) is not running</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$RDS.GW.PORT}</macro>
+                    <value>443</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>
