@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2022-09-28T15:13:55Z'
+  date: '2022-11-30T09:53:39Z'
   groups:
     -
       uuid: b9390195ecad4986968746a2a9b56354
@@ -10,6 +10,10 @@ zabbix_export:
       uuid: 01548d1b601f4732b8b26c229305e5bf
       template: 'AD DS Health and Performance'
       name: 'AD DS Health and Performance'
+      description: |
+        Template tooling version used: 2.00
+        
+        https://github.com/NikonovAleksei/zabbix/blob/master/AD_DS_Health_and_Performance.yaml
       groups:
         -
           name: 'My Templates'
@@ -68,6 +72,13 @@ zabbix_export:
               uuid: 79e002ed7b0c4bff92ca5461083c0ba0
               expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0'
               name: 'Directory Service Events Error on {HOST.NAME}'
+            -
+              uuid: f9e5c67afe0f4aa880c6ca2e11fec90c
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],,"8451")=1'
+              name: 'The replication operation encountered a database error on {HOST.NAME}'
+              url: 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/active-directory-replication-error-8451'
+              priority: AVERAGE
+              description: 'Active Directory Replication Error 8451: "The replication operation encountered a database error"'
         -
           uuid: 318dcb7c692947e08f126e056f77827f
           name: 'DNS Server Events'
@@ -87,6 +98,24 @@ zabbix_export:
               expression: 'logseverity(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],1800s)=0'
               name: 'DNS Server Events Error on {HOST.NAME}'
         -
+          uuid: 1bc801ab1b39417ea4bafcc00291991d
+          name: 'NETLOGON Events'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[System,,"Error","NETLOGON",^5723$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Events'
+          triggers:
+            -
+              uuid: 63a97106a4334ac4b4bbc99c86b1dea6
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[System,,"Error","NETLOGON",^5723$])>1 and nodata(/AD DS Health and Performance/eventlog[System,,"Error","NETLOGON",^5723$],1800s)=0'
+              name: 'Netlogon Error on {HOST.NAME}'
+        -
           uuid: 24fd27b171794bc79fdad0e79109f335
           name: 'LogFile (Netlogon)'
           type: ZABBIX_ACTIVE
@@ -99,6 +128,13 @@ zabbix_export:
             -
               tag: Application
               value: 'AD DS Events'
+          triggers:
+            -
+              uuid: 8362ec36534c4256a1b16f35e7bf62a3
+              expression: 'nodata(/AD DS Health and Performance/log[c:\windows\debug\netlogon.log,"NO_CLIENT_SITE",,,skip,,,],3600)=0'
+              name: 'Active Directory Missing IP Range < - > Site Allocations'
+              priority: WARNING
+              manual_close: 'YES'
         -
           uuid: 91dc10e30b9244cc8584124a159d303c
           name: 'LDAP Port is running'
@@ -132,7 +168,7 @@ zabbix_export:
           triggers:
             -
               uuid: 71807bb6e6d0416fbaa68fb74833be03
-              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Database Reads/sec],#3)>10'
+              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Database Reads/sec],5m)>10'
               name: 'I/O Database Reads/sec > 10 on {HOST.NAME}'
               priority: WARNING
         -
@@ -150,7 +186,7 @@ zabbix_export:
           triggers:
             -
               uuid: 4ba50e9ab3c548ed9f7670aaf2d9fc64
-              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Database Reads Average Latency],#3)>15'
+              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Database Reads Average Latency],5m)>15'
               name: 'I/O Database Reads Average Latency > 15ms on {HOST.NAME}'
               priority: WARNING
         -
@@ -180,7 +216,7 @@ zabbix_export:
           triggers:
             -
               uuid: 611b5fa4963348ac8e79dae0bce0233f
-              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Log Writes Average Latency],#3)>10'
+              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Log Writes Average Latency],5m)>10'
               name: 'I/O Log Writes Average Latency > 10ms on {HOST.NAME}'
               priority: WARNING
         -
@@ -219,6 +255,46 @@ zabbix_export:
           key: 'perf_counter_en[\DNS\UDP Response Sent/sec]'
           history: 1w
           value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
+        -
+          uuid: eef53313a77a4640a2c6aca1d295ddc1
+          name: 'Netlogon Average Semaphore Hold Time'
+          key: 'perf_counter_en[\Netlogon(_Total)\Average Semaphore Hold Time]'
+          history: 1w
+          value_type: FLOAT
+          units: s
+          description: 'perf_counter_en[\Netlogon(*)\Average Semaphore Hold Time]'
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
+          triggers:
+            -
+              uuid: d1840f027bc44b2ab786f67dd25e81b5
+              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Netlogon(_Total)\Average Semaphore Hold Time],15m)>1'
+              name: 'Average Semaphore Hold Time > 1s on {HOST.NAME}'
+              priority: WARNING
+        -
+          uuid: 322ffe2dae1d4a7b8d0c96b435e332f4
+          name: 'Netlogon Semaphore Acquires'
+          key: 'perf_counter_en[\Netlogon(_Total)\Semaphore Acquires]'
+          history: 1w
+          value_type: FLOAT
+          description: 'perf_counter_en[\Netlogon()\Semaphore Acquires]'
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
+        -
+          uuid: 87fc179f037c4983a7e34f3c30d061d3
+          name: 'Netlogon Semaphore Timeouts'
+          key: 'perf_counter_en[\Netlogon(_Total)\Semaphore Timeouts]'
+          history: 1w
+          value_type: FLOAT
+          description: 'perf_counter_en[\Netlogon()\Semaphore Timeouts]'
           tags:
             -
               tag: Application
@@ -720,6 +796,20 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Statistics of Connections Type'
+            -
+              name: NetLogon
+              widgets:
+                -
+                  type: GRAPH_CLASSIC
+                  width: '12'
+                  height: '5'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: NetLogon
       valuemaps:
         -
           uuid: 7d7a9ff770b0415781bbc49c400a60ed
@@ -945,3 +1035,28 @@ zabbix_export:
           item:
             host: 'AD DS Health and Performance'
             key: 'perf_counter_en[\Process(lsass)\% Processor Time]'
+    -
+      uuid: e18badff90144a639a25836bfa0f78d2
+      name: NetLogon
+      ymin_type_1: FIXED
+      graph_items:
+        -
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: 'perf_counter_en[\Netlogon(_Total)\Average Semaphore Hold Time]'
+        -
+          sortorder: '1'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: 'perf_counter_en[\Netlogon(_Total)\Semaphore Acquires]'
+        -
+          sortorder: '2'
+          color: 2774A4
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: 'perf_counter_en[\Netlogon(_Total)\Semaphore Timeouts]'
