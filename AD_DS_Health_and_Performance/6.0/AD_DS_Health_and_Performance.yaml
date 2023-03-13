@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2022-11-30T09:53:39Z'
+  date: '2023-03-13T08:49:59Z'
   groups:
     -
       uuid: b9390195ecad4986968746a2a9b56354
@@ -69,16 +69,23 @@ zabbix_export:
               value: 'AD DS Events'
           triggers:
             -
+              uuid: f9e5c67afe0f4aa880c6ca2e11fec90c
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],,"467")=1'
+              name: 'AD database corrupted on {HOST.NAME}'
+              priority: AVERAGE
+            -
               uuid: 79e002ed7b0c4bff92ca5461083c0ba0
               expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0'
               name: 'Directory Service Events Error on {HOST.NAME}'
             -
-              uuid: f9e5c67afe0f4aa880c6ca2e11fec90c
-              expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],,"8451")=1'
-              name: 'The replication operation encountered a database error on {HOST.NAME}'
-              url: 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/active-directory-replication-error-8451'
-              priority: AVERAGE
-              description: 'Active Directory Replication Error 8451: "The replication operation encountered a database error"'
+              uuid: 2a91cf8e09c24cc1a5aea2d19bb1b85d
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],,"2042")=1'
+              recovery_mode: NONE
+              name: 'It has been too long since {HOST.NAME} replicated'
+              url: 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/active-directory-replication-event-id-2042'
+              priority: HIGH
+              description: 'If a domain controller has not replicated with its partner for longer than a tombstone lifetime, it is possible that a lingering object problem exists on one or both domain controllers. The tombstone lifetime in an Active Directory forest determines how long a deleted object (called a "tombstone") is retained in Active Directory Domain Services (AD DS). The tombstone lifetime is determined by the value of the tombstoneLifetime attribute on the Directory Service object in the configuration directory partition.'
+              manual_close: 'YES'
         -
           uuid: 318dcb7c692947e08f126e056f77827f
           name: 'DNS Server Events'
@@ -97,6 +104,40 @@ zabbix_export:
               uuid: a600b41075964c11a5ddccd0989e3192
               expression: 'logseverity(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],1800s)=0'
               name: 'DNS Server Events Error on {HOST.NAME}'
+        -
+          uuid: 1de63c44a0be46ef92569993c7720515
+          name: 'Microsoft-Windows-Backup Events'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Windows-Backup,,"Information|Error"]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          triggers:
+            -
+              uuid: a06a5f794847445fbb107e3dd62d3950
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[Microsoft-Windows-Backup,,"Information|Error"])>1 and nodata(/AD DS Health and Performance/eventlog[Microsoft-Windows-Backup,,"Information|Error"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Microsoft-Windows-Backup,,"Information|Error"],,"5")=1'
+              recovery_mode: NONE
+              name: 'The backup operation has failed on {HOST.NAME}'
+              priority: HIGH
+              manual_close: 'YES'
+            -
+              uuid: d5af6011bbc545858e93c48aaff3d606
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[Microsoft-Windows-Backup,,"Information|Error"])>1 and nodata(/AD DS Health and Performance/eventlog[Microsoft-Windows-Backup,,"Information|Error"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Microsoft-Windows-Backup,,"Information|Error"],,"4")=1'
+              name: 'The backup operation has finished successfully on {HOST.NAME}'
+              priority: INFO
+        -
+          uuid: a29d587fe5554b9cbb40f7e693dc44e4
+          name: 'Windows Time Service Events'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[System,"Time-Service","Warning|Error|Critical"]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Events'
         -
           uuid: 1bc801ab1b39417ea4bafcc00291991d
           name: 'NETLOGON Events'
@@ -135,6 +176,20 @@ zabbix_export:
               name: 'Active Directory Missing IP Range < - > Site Allocations'
               priority: WARNING
               manual_close: 'YES'
+        -
+          uuid: 9a9fe288a0fc45f9aef947c52336bb08
+          name: MaxConcurrentApi
+          type: CALCULATED
+          key: MaxConcurrentApi
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          params: '(last(//perf_counter_en[\Netlogon(_Total)\Semaphore Acquires])+last(//perf_counter_en[\Netlogon(_Total)\Semaphore Timeouts]))*last(//perf_counter_en[\Netlogon(_Total)\Average Semaphore Hold Time])/90'
+          description: 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/performance-tuning-ntlm-authentication-maxconcurrentapi'
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
         -
           uuid: 91dc10e30b9244cc8584124a159d303c
           name: 'LDAP Port is running'
@@ -219,6 +274,50 @@ zabbix_export:
               expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Log Writes Average Latency],5m)>10'
               name: 'I/O Log Writes Average Latency > 10ms on {HOST.NAME}'
               priority: WARNING
+        -
+          uuid: ccb11bf658ec46b49f8e21d8c7d70862
+          name: 'DFS Replicated Folders (Conflict Space In Use)'
+          key: 'perf_counter_en[\DFS Replicated Folders(*)\Conflict Space In Use]'
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
+        -
+          uuid: 166510803335410991d6ce07001613af
+          name: 'DFS Replicated Folders (RDC Bytes Received)'
+          key: 'perf_counter_en[\DFS Replicated Folders(*)\RDC Bytes Received]'
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
+        -
+          uuid: 5830f88357dd402dbb0fc569c2583e89
+          name: 'DFS Replicated Folders (Size of Files Received)'
+          key: 'perf_counter_en[\DFS Replicated Folders(*)\Size of Files Received]'
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
+        -
+          uuid: 751a5e1b5a304c96a0061c6c7c6540b9
+          name: 'DFS Replicated Folders (Total Files Received)'
+          key: 'perf_counter_en[\DFS Replicated Folders(*)\Total Files Received]'
+          delay: 5m
+          history: 1w
+          value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Performance'
         -
           uuid: fd3c312d6c944f4c8455a258dbb0ecd5
           name: 'DNS Total Query Received/sec'
@@ -450,6 +549,24 @@ zabbix_export:
               tag: Application
               value: 'AD DS Performance'
         -
+          uuid: e007b544233a44be9ed85e44dfac372e
+          name: 'State of service "ADWS" (Active Directory Web Services)'
+          key: 'service.info[ADWS,state]'
+          history: 1d
+          valuemap:
+            name: 'Windows service state'
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Services'
+          triggers:
+            -
+              uuid: a8a2eee271e44c719df1c8d72cc134ca
+              expression: 'min(/AD DS Health and Performance/service.info[ADWS,state],#3)<>0'
+              name: '"ADWS" (Active Directory Web Services) is not running'
+              priority: AVERAGE
+              description: 'The service has a state other than "Running" for the last three times.'
+        -
           uuid: f3ecb9e253c6461ea76380065038691a
           name: 'State of service "DFSR" (DFS Replication)'
           key: 'service.info[DFSR,state]'
@@ -594,6 +711,24 @@ zabbix_export:
               priority: AVERAGE
               description: 'The service has a state other than "Running" for the last three times.'
         -
+          uuid: 0fcaf720a8db467192cbec1f5563ed58
+          name: 'State of service "NTDS" (Active Directory Domain Services)'
+          key: 'service.info[NTDS,state]'
+          history: 1d
+          valuemap:
+            name: 'Windows service state'
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Services'
+          triggers:
+            -
+              uuid: b42db952b21e4019a09f5fca8d6be49d
+              expression: 'min(/AD DS Health and Performance/service.info[NTDS,state],#3)<>0'
+              name: '"NTDS" (Active Directory Domain Services) is not running'
+              priority: AVERAGE
+              description: 'The service has a state other than "Running" for the last three times.'
+        -
           uuid: 8117eba15a204854b3ac605add3ee3ec
           name: 'State of service "RpcSs" (Remote Procedure Call (RPC))'
           key: 'service.info[RpcSs,state]'
@@ -648,6 +783,17 @@ zabbix_export:
               priority: AVERAGE
               description: 'The service has a state other than "Running" for the last three times.'
         -
+          uuid: 470f2bbce13b45bba53e816e843af348
+          name: 'SYSVOL Size'
+          key: 'vfs.dir.size["{$ADSYSVOL_PATH}"]'
+          delay: 12h
+          history: 1w
+          units: Bytes
+          tags:
+            -
+              tag: Application
+              value: 'AD DS Storage'
+        -
           uuid: ba3ea33ddbe0483aa1dd88c68b1e517b
           name: 'Database Size'
           key: 'vfs.file.size["{$ADDB_PATH}"]'
@@ -676,6 +822,9 @@ zabbix_export:
         -
           macro: '{$ADLOG_PATH}'
           value: 'c:\windows\ntds\edb.log'
+        -
+          macro: '{$ADSYSVOL_PATH}'
+          value: 'c:\windows\SYSVOL'
       dashboards:
         -
           uuid: 4a4228994faa45e986d06e13aa970d5d
@@ -810,6 +959,20 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: NetLogon
+                -
+                  type: GRAPH_CLASSIC
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    -
+                      type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: 'AD DS Authentications'
+            -
+              name: DFSR
       valuemaps:
         -
           uuid: 7d7a9ff770b0415781bbc49c400a60ed
@@ -1056,6 +1219,7 @@ zabbix_export:
         -
           sortorder: '2'
           color: 2774A4
+          yaxisside: RIGHT
           calc_fnc: ALL
           item:
             host: 'AD DS Health and Performance'
