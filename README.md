@@ -12,6 +12,12 @@ Active Directory Monitoring and Attack Detection:
 Template based on MS document 
 - Best Practices for Securing Active Directory
 
+# AD CS Health and Monitoring
+Active Directory Certification Services Health and Monitoring
+
+Template based on MS documents
+- Securing Public Key Infrastructure (PKI)
+
 # AD DS Security Audit
 
 # RDS
