@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2023-03-13T08:49:59Z'
+  date: '2023-04-18T05:52:32Z'
   groups:
     -
       uuid: b9390195ecad4986968746a2a9b56354
@@ -11,9 +11,11 @@ zabbix_export:
       template: 'AD DS Health and Performance'
       name: 'AD DS Health and Performance'
       description: |
-        Template tooling version used: 2.00
+        Template tooling version used: 2.02
         
-        https://github.com/NikonovAleksei/zabbix/blob/master/AD_DS_Health_and_Performance.yaml
+        https://github.com/NikonovAleksei/zabbix/
+        
+        https://t.me/ad_zabbix_templates
       groups:
         -
           name: 'My Templates'
@@ -328,6 +330,19 @@ zabbix_export:
             -
               tag: Application
               value: 'AD DS Performance'
+          triggers:
+            -
+              uuid: 917b85b5c5434af8b566f192e919aa41
+              expression: 'max(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],#3)>5000'
+              name: 'DNS Total Query Received/sec >5000'
+              opdata: 'Current value: {ITEM.LASTVALUE1}'
+              priority: WARNING
+            -
+              uuid: 26fe1eb903814ec7b226df239ee0f949
+              expression: 'max(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],#3)>{$DNS.TOTAL.RECEIVED.MAX.WARN}'
+              name: 'DNS Total Query Received/sec is too high'
+              opdata: 'Current value: {ITEM.LASTVALUE1}'
+              priority: AVERAGE
         -
           uuid: ee208fb7ec8741a4a9ed0dda0c06759d
           name: 'DNS Total Response Sent/sec'
@@ -825,6 +840,10 @@ zabbix_export:
         -
           macro: '{$ADSYSVOL_PATH}'
           value: 'c:\windows\SYSVOL'
+        -
+          macro: '{$DNS.TOTAL.RECEIVED.MAX.WARN}'
+          value: '1000'
+          description: baseline
       dashboards:
         -
           uuid: 4a4228994faa45e986d06e13aa970d5d

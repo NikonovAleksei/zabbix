@@ -1,0 +1,452 @@
+zabbix_export:
+  version: '6.0'
+  date: '2023-04-18T05:52:15Z'
+  groups:
+    -
+      uuid: b9390195ecad4986968746a2a9b56354
+      name: 'My Templates'
+  templates:
+    -
+      uuid: cddbf652785e400b8c40f422a7304284
+      template: 'AD CS Health and Monitoring'
+      name: 'AD CS Health and Monitoring'
+      description: |
+        Template tooling version used: 1.00
+        
+        https://github.com/NikonovAleksei/zabbix/
+        
+        https://t.me/ad_zabbix_templates
+      groups:
+        -
+          name: 'My Templates'
+      items:
+        -
+          uuid: a15de568a0ab463082bf485d7179023b
+          name: 'Certificate Services Events'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Application,,"Warning|Error|Critical","Microsoft-Windows-CertificationAuthority"]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+        -
+          uuid: 7b60d89fdab447c0b3ff3ab438fbc590
+          name: 'CertificationAuthority (ID15)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^15$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Active Directory Certificate Services did not start: Version does not match certif.dll.'
+          triggers:
+            -
+              uuid: 1bb8f52688b5490cb4411413171e44b8
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^15$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^15$],600s)=0'
+              name: 'AD CS did not start: Version does not match certif.dll.'
+              priority: HIGH
+              manual_close: 'YES'
+        -
+          uuid: e11dafaf89864a46b6071c69a6759f97
+          name: 'CertificationAuthority (ID55)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^55$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Active Directory Certificate Services unrevoked the certificate for request %1 for %2.'
+          triggers:
+            -
+              uuid: c289223480a54523b40c4d58cc915ec8
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^55$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^55$],600s)=0'
+              name: 'AD CS unrevoked the certificate for request'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 3dd168eba18945e68b74ef5a67a469a5
+          name: 'CertificationAuthority (ID60)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^60$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Active Directory Certificate Services refused to process an extremely long request from %1. This may indicate a denial-of-service attack. If the request was rejected in error, modify the MaxIncomingMessageSize registry parameter via certutil -setreg CA\MaxIncomingMessageSize <bytes>.  Unless verbose logging is enabled, this error will not be logged again for 20 minutes.'
+          triggers:
+            -
+              uuid: 084ca93dfcf94698be641624006d7f65
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^60$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^60$],600s)=0'
+              name: 'AD CS refused to process an extremely long request.'
+              priority: HIGH
+              manual_close: 'YES'
+        -
+          uuid: 5d44aff3d9d148398a7673d2e62633cc
+          name: 'CertificationAuthority (ID95)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^95$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Security permissions are corrupted or missing.  The Active Directory Certificate Services may need to be reinstalled.'
+          triggers:
+            -
+              uuid: 6287aaf65f69431d9dee58151cef3db6
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^95$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^95$],600s)=0'
+              name: 'Security permissions are corrupted or missing.'
+              priority: HIGH
+              manual_close: 'YES'
+        -
+          uuid: 425fd1a4d98d4f39b8a056c2a22e4f6a
+          name: 'Windows Security (ID4657)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4657$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+        -
+          uuid: 0f54a0595377426e9e47799a0dca602b
+          name: 'Windows Security (ID4868)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4868$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'The certificate manager denied a pending certificate request.'
+          triggers:
+            -
+              uuid: 91055ea7f67a42bba2a5621700142445
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4868$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4868$],600s)=0'
+              name: 'The certificate manager denied a pending certificate request.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 192d073034fa47aab1b5ed8f7d683ca4
+          name: 'Windows Security (ID4870)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4870$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Certificate Services revoked a certificate.'
+          triggers:
+            -
+              uuid: 0810c82bb279479da1cfe0750e957715
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4870$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4870$],600s)=0'
+              name: 'Certificate Services revoked a certificate.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 856fd62586334576a2b837bc3510591a
+          name: 'Windows Security (ID4873)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4873$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'A certificate request extension changed.   Request ID: %1 Name: %2 Type: %3 Flags: %4 Data: %5'
+          triggers:
+            -
+              uuid: 9eb02dafcadc4f84bb29a399ab314a1a
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4873$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4873$],600s)=0'
+              name: 'A certificate request extension changed.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: e99f037fb18e414baa3956c7d8f0eb68
+          name: 'Windows Security (ID4874)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4874$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'One or more certificate request attributes changed.   Request ID: %1 Attributes: %2'
+          triggers:
+            -
+              uuid: 00288391d0cd40b98beabe0bab879835
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4874$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4874$],600s)=0'
+              name: 'One or more certificate request attributes changed.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 8cb31716bbf840d78282e1099606bffe
+          name: 'Windows Security (ID4882)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4882$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'The security permissions for Certificate Services changed.'
+          triggers:
+            -
+              uuid: 18e1f87c07ba49d787ca267bea9d8135
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4882$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4882$],600s)=0'
+              name: 'The security permissions for Certificate Services changed.'
+              priority: HIGH
+              manual_close: 'YES'
+        -
+          uuid: 513285bd574249488e6d8e446bdb3939
+          name: 'Windows Security (ID4883)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4883$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Certificate Services retrieved an archived key.   Request ID: %1'
+          triggers:
+            -
+              uuid: 84804ac52ab9436a9d16aee7534092f6
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4883$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4883$],600s)=0'
+              name: 'Certificate Services retrieved an archived key.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 46af7c3c5a2c4458a369e4db8bfb3779
+          name: 'Windows Security (ID4885)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4885$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'The audit filter for Certificate Services changed.'
+          triggers:
+            -
+              uuid: e8ae0c5637394863b81eff141b08debd
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4885$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4885$],600s)=0'
+              name: 'The audit filter for Certificate Services changed.'
+              priority: HIGH
+              manual_close: 'YES'
+        -
+          uuid: 2db86df51b8d403db015c2f800dc2593
+          name: 'Windows Security (ID4887)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4887$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Certificate Services approved a certificate request and issued a certificate.   Request ID: %1 Requester: %2 Attributes: %3 Disposition: %4 SKI:  %5 Subject: %6'
+          triggers:
+            -
+              uuid: 80db3f51472248fc84f4235330b8f57d
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4887$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4887$],600s)=0'
+              name: 'Certificate Services approved a certificate request and issued a certificate.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: de29b215b97f4075a9165e1bee8219fb
+          name: 'Windows Security (ID4888)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4888$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Certificate Services denied a certificate request.   Request ID: %1 Requester: %2 Attributes: %3 Disposition: %4 SKI:  %5 Subject: %6'
+          triggers:
+            -
+              uuid: 5fb2ed69fb364653bb0f58ec4a47a6be
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4888$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4888$],600s)=0'
+              name: 'Certificate Services denied a certificate request.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: c0a7efec3d9e4012978b118b5b15d90d
+          name: 'Windows Security (ID4890)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4890$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'The certificate manager settings for Certificate Services changed.'
+          triggers:
+            -
+              uuid: 20ff500a3d9a4409b0804351000beadf
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4890$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4890$],600s)=0'
+              name: 'The certificate manager settings for Certificate Services changed.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 6bf8a2f11e934337b8e300cdcca0b0d4
+          name: 'Windows Security (ID4891)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4891$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'A configuration entry changed in Certificate Services.   Node: %1 Entry: %2 Value: %3'
+          triggers:
+            -
+              uuid: 8a0670ecdf4b4ce0b4b913df392dbede
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4891$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4891$],600s)=0'
+              name: 'A configuration entry changed in Certificate Services.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: f7114dfb8fb84d3cbfc114426f82f2a2
+          name: 'Windows Security (ID4892)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4892$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'A property of Certificate Services changed.'
+          triggers:
+            -
+              uuid: a99b1b7cdbbf46c3b1fea771b3262130
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4892$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4892$],600s)=0'
+              name: 'A property of Certificate Services changed.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: fecda5d9cdea4bddae46cbdf3e72c8ee
+          name: 'Windows Security (ID4896)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4896$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'One or more rows have been deleted from the certificate database.'
+          triggers:
+            -
+              uuid: 23bf0198ccac4e28a78bdfee7a7ae59b
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4896$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4896$],600s)=0'
+              name: 'One or more rows have been deleted from the certificate database.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: f3f47337410640bca67f5225a829cf24
+          name: 'Windows Security (ID4897)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4897$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Role separation enabled: %1'
+          triggers:
+            -
+              uuid: 8cb098688c364616b83f40a300a793b0
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4897$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4897$],600s)=0'
+              name: 'Role separation enabled'
+              priority: WARNING
+              description: 'If role separation is used, this can be used to trigger an alert if the expected configuration changes.'
+              manual_close: 'YES'
+        -
+          uuid: 7d0e90f6bff2456c86e50242f769ccc9
+          name: 'Windows Security (ID4898)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4898$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Certificate Services loaded a template.  %1 v%2 (Schema V%3) %4 %5  Template Information:  Template Content:  %7  Security Descriptor:  %8  Additional Information:  Domain Controller: %6'
+          triggers:
+            -
+              uuid: a0e87a76dd24425a8e1c0e5b8739b868
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4898$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4898$],600s)=0'
+              name: 'Certificate Services loaded a template.'
+              priority: WARNING
+              description: 'Alert if templates that are not expected on a CA are loaded.'
+              manual_close: 'YES'
+        -
+          uuid: b0f2b714a1b7423393aae0df2f96a000
+          name: 'Windows Security (ID4899)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4899$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'A Certificate Services template was updated.  %1 v%2 (Schema V%3) %4 %5  Template Change Information:  Old Template Content: %8  New Template Content:  %7  Additional Information:  Domain Controller: %6'
+          triggers:
+            -
+              uuid: 14c1debb92a043fdb00c14c4d3e0fc6d
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4899$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4899$],600s)=0'
+              name: 'A Certificate Services template was updated.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: d77b1764e4d04f49a0002af14d97910d
+          name: 'Windows Security (ID4900)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4900$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'Certificate Services template security was updated.  %1 v%2 (Schema V%3) %4 %5  Template Change Information:  Old Template Content:  %9  New Template Content: %7  Old Security Descriptor:  %10  New Security Descriptor:  %8  Additional Information:  Domain Controller: %6'
+          triggers:
+            -
+              uuid: 0bb54f1d22c74629a95514b51c481f6e
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4900$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4900$],600s)=0'
+              name: 'Certificate Services template security was updated.'
+              priority: WARNING
+              manual_close: 'YES'
+        -
+          uuid: 80ef5e920b9c48069e5d5c3dc77a4997
+          name: 'Windows Security (ID5124)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^5124$]'
+          delay: 5m
+          trends: '0'
+          value_type: LOG
+          description: 'A security setting was updated on the OCSP Responder Service.'
+          triggers:
+            -
+              uuid: 38c56cb7889849d989692455e2803750
+              expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^5124$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^5124$],600s)=0'
+              name: 'A security setting was updated on the OCSP Responder Service.'
+              priority: HIGH
+              manual_close: 'YES'
+        -
+          uuid: f909d3aa0ab84136ba71296717acd387
+          name: 'State of service "certsvc" (Certificate Services)'
+          key: 'service.info[certsvc,state]'
+          history: 1d
+          valuemap:
+            name: 'Windows service state'
+          tags:
+            -
+              tag: Application
+              value: 'AD CS Services'
+          triggers:
+            -
+              uuid: cfde8e3bb43b46cc945381ab472a0757
+              expression: 'min(/AD CS Health and Monitoring/service.info[certsvc,state],#3)<>0'
+              name: '"Certsvc" (Certificate Services) is not running'
+              priority: AVERAGE
+              description: 'The service has a state other than "Running" for the last three times.'
+      valuemaps:
+        -
+          uuid: 0b683fa7d30c4ced99bbd40128ced1ef
+          name: 'Service state'
+          mappings:
+            -
+              value: '0'
+              newvalue: Down
+            -
+              value: '1'
+              newvalue: Up
+        -
+          uuid: ecfc40b4ebbc4527a3398a28802337f3
+          name: 'Windows service state'
+          mappings:
+            -
+              value: '0'
+              newvalue: Running
+            -
+              value: '1'
+              newvalue: Paused
+            -
+              value: '2'
+              newvalue: 'Start pending'
+            -
+              value: '3'
+              newvalue: 'Pause pending'
+            -
+              value: '4'
+              newvalue: 'Continue pending'
+            -
+              value: '5'
+              newvalue: 'Stop pending'
+            -
+              value: '6'
+              newvalue: Stopped
+            -
+              value: '7'
+              newvalue: Unknown
+            -
+              value: '255'
+              newvalue: 'No such service'

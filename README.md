@@ -1,4 +1,4 @@
-# AD DS Health and Performance v 2.01
+# AD DS Health and Performance v 2.02
 Active Directory Health and Performance:
 
 The folder contains zabbix template for Active Directory and based on MS documents:
@@ -12,7 +12,7 @@ Active Directory Monitoring and Attack Detection:
 Template based on MS document 
 - Best Practices for Securing Active Directory
 
-# AD CS Health and Monitoring
+# AD CS Health and Monitoring v 1.00
 Active Directory Certification Services Health and Monitoring
 
 Template based on MS documents

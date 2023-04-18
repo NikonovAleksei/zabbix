@@ -1,0 +1,282 @@
+zabbix_export:
+  version: '6.0'
+  date: '2023-04-18T05:55:32Z'
+  groups:
+    -
+      uuid: b9390195ecad4986968746a2a9b56354
+      name: 'My Templates'
+  templates:
+    -
+      uuid: a0bde2ef5ef14b3da5315124c4ad58c2
+      template: 'AD DS Security Audit'
+      name: 'AD DS Security Audit'
+      description: |
+        Template tooling version used: 1.00
+        
+        https://github.com/NikonovAleksei/zabbix/
+        
+        https://t.me/ad_zabbix_templates
+      groups:
+        -
+          name: 'My Templates'
+      items:
+        -
+          uuid: d51ab16dcb4b475e8c34d7fab9dd1786
+          name: 'Windows Security (ID4720)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4720$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 1c520af3153e492aa59aa81e82df288c
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4720$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4720$],600s)=0'
+              name: 'A user account was created.'
+              priority: INFO
+        -
+          uuid: 012215e9936f4e40aab3e8abf8d9ad8a
+          name: 'Windows Security (ID4722)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4722$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 98cfb6218b2f4b52806c8b59287066cb
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4722$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4722$],600s)=0'
+              name: 'A user account was enabled.'
+        -
+          uuid: 24ad0fcac3ad41aba6db9250bec15ffc
+          name: 'Windows Security (ID4723)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4723$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 7921bd0d421946f9ad5b5810fd195f7b
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4723$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4723$],600s)=0'
+              name: 'An attempt was made to change an account''s password.'
+        -
+          uuid: b6fbd6ff6c994d8c854644c6092c6f75
+          name: 'Windows Security (ID4724)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4724$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 8c16af4f9d2f498cb71f8b69ee756053
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4724$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4724$],600s)=0'
+              name: 'An attempt was made to reset an account''s password.'
+              priority: INFO
+        -
+          uuid: 11cda07d18cf4362b8048e2110c76895
+          name: 'Windows Security (ID4725)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4725$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 7967ddb42cb144c2a4f96df98d01f419
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4725$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4725$],600s)=0'
+              name: 'A user account was disabled.'
+              priority: INFO
+        -
+          uuid: f4038a01684442eb9e1676f11ce7d3af
+          name: 'Windows Security (ID4726)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4726$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 4ef37883978b47a08a11d6a0203f9337
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4726$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4726$],600s)=0'
+              name: 'A user account was deleted.'
+              priority: WARNING
+        -
+          uuid: 324112cafdf44637b06d93a285418ebd
+          name: 'Windows Security (ID4738)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4738$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 3760ed12a00a4838a51ae0dfa5d5d1e6
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4738$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4738$],600s)=0'
+              name: 'A user account was changed.'
+              priority: INFO
+        -
+          uuid: 9cd311891c944e2bac1b3c2228e39dd3
+          name: 'Windows Security (ID4740)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4740$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 018938867152482db6386c4d585842b2
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4740$])>0 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4740$],600s)=0'
+              name: 'A user account was locked out.'
+              priority: INFO
+        -
+          uuid: 4e176bbd01114e92b6f9736f30322246
+          name: 'Windows Security (ID4741)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4741$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 11299de9de6748198c002634952bcd10
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4741$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4741$],600s)=0'
+              name: 'A computer account was created.'
+        -
+          uuid: 0a54b898bb284dbab1935b65fa6bf408
+          name: 'Windows Security (ID4742)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4742$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 26d602bbdcd54b6aa58d38d79d3f6409
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4742$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4742$],600s)=0'
+              name: 'A computer account was changed.'
+        -
+          uuid: d8b668807a394b3c981ee36572e87c0d
+          name: 'Windows Security (ID4743)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4743$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 20e8ab11e5b84581a444bd947f31ede0
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4743$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4743$],600s)=0'
+              name: 'A computer account was deleted.'
+        -
+          uuid: 5c377f3dd6b7495e9fb76435e87022db
+          name: 'Windows Security (ID4767)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4767$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 41fd7a633da14268b43284c4aadca067
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4767$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4767$],600s)=0'
+              name: 'A user account was unlocked.'
+              priority: INFO
+        -
+          uuid: e736d163e4964acd90f185943d84cfd1
+          name: 'Windows Security (ID4780)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4780$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: a02b27e8dedc404ab50144a946b85a02
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4780$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4780$],600s)=0'
+              name: 'The ACL was set on accounts which are members of administrators groups.'
+        -
+          uuid: 8a5b8ead83a3499894689b37ab091a31
+          name: 'Windows Security (ID4781)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4781$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          tags:
+            -
+              tag: Application
+              value: 'Security events'
+          triggers:
+            -
+              uuid: 212b75e1cf3c49cf83fd3707e1e37af1
+              expression: 'logseverity(/AD DS Security Audit/eventlog[Security,,,,^4781$])>1 and nodata(/AD DS Security Audit/eventlog[Security,,,,^4781$],600s)=0'
+              name: 'The name of an account was changed.'
+              priority: WARNING
