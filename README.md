@@ -1,4 +1,4 @@
-# Zabbix monitoring Active Directory
+# Active Directory monitoring with Zabbix  
 
 ## [AD DS Health and Performance v 2.02](https://github.com/NikonovAleksei/zabbix/wiki/AD-DS-Health-and-Performance)
 Active Directory Health and Performance:
