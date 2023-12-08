@@ -1,50 +1,23 @@
 zabbix_export:
   version: '6.0'
-  date: '2022-12-30T09:43:16Z'
+  date: '2023-12-08T06:05:49Z'
   groups:
-    -
-      uuid: b9390195ecad4986968746a2a9b56354
+    - uuid: b9390195ecad4986968746a2a9b56354
       name: 'My Templates'
   templates:
-    -
-      uuid: 89ce3597149b4bd986a3ae02fc862070
+    - uuid: 89ce3597149b4bd986a3ae02fc862070
       template: 'AD DS Monitoring and Attack Detection'
       name: 'AD DS Monitoring and Attack Detection'
       description: |
-        ## Overview
+        Template tooling version used: 2.00
         
-        **Template based on MS document "Best Practices for Securing Active Directory"**  
-          
-        Items & Triggers
-        A monitored security event pattern has occurred.
-        A replay attack was detected. May be a harmless false positive due to misconfiguration error.
-        System audit policy was changed.
-        SID History was added to an account.
-        An attempt to add SID History to an account failed.
-        An attempt was made to set the Directory Services Restore Mode.
-        Role separation enabled.
-        Special groups have been assigned to a new logon.
-        A security setting was updated on the OCSP Responder Service
-        Possible denial-of-service (DoS) attack
-        The audit log was cleared
-        Administrator recovered system from CrashOnAuditFail.
-        Users who are not administrators will now be allowed to log on.
-        Some auditable activity might not have been recorded.
-        SIDs were filtered.
-        Backup of data protection master key was attempted.
-        Recovery of data protection master key was attempted.
-        A new trust was created to a domain.
-        Kerberos policy was changed.
-        Encrypted data recovery policy was changed.
-        The audit policy (SACL) on an object was changed.
-        Trusted domain information was modified.
-        An attempt was made to reset an account’s password.
+        https://github.com/NikonovAleksei/zabbix/
+        
+        https://t.me/ad_zabbix_templates
       groups:
-        -
-          name: 'My Templates'
+        - name: 'My Templates'
       items:
-        -
-          uuid: 33573c0f8f204c769e4f76df36c5a193
+        - uuid: 33573c0f8f204c769e4f76df36c5a193
           name: 'Windows Security (ID1102)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^1102$]'
@@ -54,18 +27,15 @@ zabbix_export:
           value_type: LOG
           description: 'The audit log was cleared.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 185aea205c1d44a59319d0c1782b0830
+            - uuid: 185aea205c1d44a59319d0c1782b0830
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^1102$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^1102$],600s)=0'
               name: 'The audit log was cleared.'
               priority: HIGH
               description: 'The audit log was cleared.'
-        -
-          uuid: d16269d4fd1643a3a757cbdce60dd465
+        - uuid: d16269d4fd1643a3a757cbdce60dd465
           name: 'Windows Security (ID4618)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4618$]'
@@ -75,18 +45,15 @@ zabbix_export:
           value_type: LOG
           description: 'A monitored security event pattern has occurred.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: f408b5f6ec734930922184e8e0c99cd8
+            - uuid: f408b5f6ec734930922184e8e0c99cd8
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4618$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4618$],600s)=0'
               name: 'A monitored security event pattern has occurred.'
               priority: HIGH
               description: 'A monitored security event pattern has occurred.'
-        -
-          uuid: 046a62e2ca024291b8d9f67693394c48
+        - uuid: 046a62e2ca024291b8d9f67693394c48
           name: 'Windows Security (ID4621)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4621$]'
@@ -96,18 +63,15 @@ zabbix_export:
           value_type: LOG
           description: 'Administrator recovered system from CrashOnAuditFail. Users who are not administrators will now be allowed to log on. Some auditable activity might not have been recorded.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: b6d72d415ab44860bd270e33a87573bf
+            - uuid: b6d72d415ab44860bd270e33a87573bf
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4621$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4621$],600s)=0'
               name: 'Administrator recovered system from CrashOnAuditFail.'
               priority: AVERAGE
               description: 'Administrator recovered system from CrashOnAuditFail. Users who are not administrators will now be allowed to log on. Some auditable activity might not have been recorded.'
-        -
-          uuid: ed687d6177da4b20b9743058b18c9386
+        - uuid: ed687d6177da4b20b9743058b18c9386
           name: 'Windows Security (ID4649)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4649$]'
@@ -117,18 +81,15 @@ zabbix_export:
           value_type: LOG
           description: 'A replay attack was detected. May be a harmless false positive due to misconfiguration error.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 6da449d5ad134d858af9ddd7471949e7
+            - uuid: 6da449d5ad134d858af9ddd7471949e7
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4649$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4649$],600s)=0'
               name: 'A replay attack was detected. May be a harmless false positive due to misconfiguration error.'
               priority: HIGH
               description: 'A replay attack was detected. May be a harmless false positive due to misconfiguration error.'
-        -
-          uuid: 1810b6b6320240d383d501ca61cf275b
+        - uuid: 1810b6b6320240d383d501ca61cf275b
           name: 'Windows Security (ID4675)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4675$]'
@@ -138,18 +99,15 @@ zabbix_export:
           value_type: LOG
           description: 'SIDs were filtered.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: eb45923767fe450aa47dcfe3eb2213bf
+            - uuid: eb45923767fe450aa47dcfe3eb2213bf
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4675$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4675$],600s)=0'
               name: 'SIDs were filtered.'
               priority: AVERAGE
               description: 'SIDs were filtered.'
-        -
-          uuid: e7a7d48236c847dca4032645268abf8f
+        - uuid: e7a7d48236c847dca4032645268abf8f
           name: 'Windows Security (ID4692)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4692$]'
@@ -159,18 +117,15 @@ zabbix_export:
           value_type: LOG
           description: 'Backup of data protection master key was attempted.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: eeaade36a89c47bfbbd92ee2ad4e71f5
+            - uuid: eeaade36a89c47bfbbd92ee2ad4e71f5
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4692$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4692$],600s)=0'
               name: 'Backup of data protection master key was attempted.'
               priority: AVERAGE
               description: 'Backup of data protection master key was attempted.'
-        -
-          uuid: a21ab5f1630145f19b87e78a531ca074
+        - uuid: a21ab5f1630145f19b87e78a531ca074
           name: 'Windows Security (ID4693)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4693$]'
@@ -180,18 +135,15 @@ zabbix_export:
           value_type: LOG
           description: 'Recovery of data protection master key was attempted.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 3d8744411ebb41ea9c305b732e3fd9f2
+            - uuid: 3d8744411ebb41ea9c305b732e3fd9f2
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4693$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4693$],600s)=0'
               name: 'Recovery of data protection master key was attempted.'
               priority: AVERAGE
               description: 'Backup of data protection master key was attempted.'
-        -
-          uuid: 0983d27e871145fe9f7e4d0e391de4a7
+        - uuid: 0983d27e871145fe9f7e4d0e391de4a7
           name: 'Windows Security (ID4706)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4706$]'
@@ -201,18 +153,15 @@ zabbix_export:
           value_type: LOG
           description: 'A new trust was created to a domain.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: d32365ca7f514bcba4fd7e2bb958a975
+            - uuid: d32365ca7f514bcba4fd7e2bb958a975
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4706$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4706$],600s)=0'
               name: 'A new trust was created to a domain.'
               priority: AVERAGE
               description: 'A new trust was created to a domain.'
-        -
-          uuid: ac64ad065d3d43618232465f997326d0
+        - uuid: ac64ad065d3d43618232465f997326d0
           name: 'Windows Security (ID4713)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4713$]'
@@ -222,18 +171,15 @@ zabbix_export:
           value_type: LOG
           description: 'Kerberos policy was changed.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 13a6953f2a7646bda6f639d7c3f66096
+            - uuid: 13a6953f2a7646bda6f639d7c3f66096
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4713$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4713$],600s)=0'
               name: 'Kerberos policy was changed.'
               priority: AVERAGE
               description: 'Kerberos policy was changed.'
-        -
-          uuid: a6ff13b0a71e496392347c07b842b3d9
+        - uuid: a6ff13b0a71e496392347c07b842b3d9
           name: 'Windows Security (ID4714)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4714$]'
@@ -243,18 +189,15 @@ zabbix_export:
           value_type: LOG
           description: 'Encrypted data recovery policy was changed.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: b41f1b71f7184efabd8bc6856651e485
+            - uuid: b41f1b71f7184efabd8bc6856651e485
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4714$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4714$],600s)=0'
               name: 'Encrypted data recovery policy was changed.'
               priority: AVERAGE
               description: 'Encrypted data recovery policy was changed.'
-        -
-          uuid: 0e21e50c3897472f9e6fa3d9c2ccc016
+        - uuid: 0e21e50c3897472f9e6fa3d9c2ccc016
           name: 'Windows Security (ID4715)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4715$]'
@@ -264,18 +207,15 @@ zabbix_export:
           value_type: LOG
           description: 'The audit policy (SACL) on an object was changed.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 7915f689be6d47ac8f2e6490b43840b7
+            - uuid: 7915f689be6d47ac8f2e6490b43840b7
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4715$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4715$],600s)=0'
               name: 'The audit policy (SACL) on an object was changed.'
               priority: AVERAGE
               description: 'The audit policy (SACL) on an object was changed.'
-        -
-          uuid: 1ac54e2aa17545a085a6a16c47968402
+        - uuid: 1ac54e2aa17545a085a6a16c47968402
           name: 'Windows Security (ID4716)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4716$]'
@@ -285,18 +225,15 @@ zabbix_export:
           value_type: LOG
           description: 'Trusted domain information was modified.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: b7541e370e6f4b9da560e06689b1277e
+            - uuid: b7541e370e6f4b9da560e06689b1277e
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4716$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4716$],600s)=0'
               name: 'Trusted domain information was modified.'
               priority: AVERAGE
               description: 'Trusted domain information was modified.'
-        -
-          uuid: d85961cb2a6243d8b37ae5637b119913
+        - uuid: d85961cb2a6243d8b37ae5637b119913
           name: 'Windows Security (ID4719)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4719$]'
@@ -306,18 +243,161 @@ zabbix_export:
           value_type: LOG
           description: 'System audit policy was changed.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 2c0f82f99d354dadbe78baaec144ca83
+            - uuid: 2c0f82f99d354dadbe78baaec144ca83
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4719$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4719$],600s)=0'
               name: 'System audit policy was changed.'
               priority: HIGH
               description: 'System audit policy was changed.'
-        -
-          uuid: 5ee1feecddba4a6091b33bb87ac303e7
+        - uuid: 29299534c2444fcaa9f567d187a9cee8
+          name: 'Windows Security (ID4724)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4724$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'An attempt was made to reset an account''s password.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: ce5de5a6079445a1b84671c0604d7bb4
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4724$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4724$],600s)=0'
+              name: 'An attempt was made to reset an account’s password.'
+              priority: AVERAGE
+              description: 'An attempt was made to reset an account’s password.'
+        - uuid: 888989378cb24d5890f679167c01cb7e
+          name: 'Windows Security (ID4727)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4727$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A security-enabled global group was created.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 55e575f09d2b41c6b48285287215521b
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4727$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4727$],600s)=0'
+              name: 'A security-enabled global group was created.'
+              priority: AVERAGE
+              description: 'A security-enabled global group was created.'
+        - uuid: 9010d6b1d525451fa2f481ecb17026ae
+          name: 'Windows Security (ID4735)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4735$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A security-enabled local group was changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 7ecae7f1befa4076a1c5b8c9a10109b0
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4735$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4735$],600s)=0'
+              name: 'A security-enabled local group was changed.'
+              priority: AVERAGE
+              description: 'A security-enabled local group was changed.'
+        - uuid: a7227ba4238440798b7bbf24d07034d3
+          name: 'Windows Security (ID4737)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4737$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A security-enabled global group was changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: e416a4fb830641d487a9c75813a08ffc
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4737$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4737$],600s)=0'
+              name: 'A security-enabled global group was changed.'
+              priority: AVERAGE
+              description: 'A security-enabled global group was changed.'
+        - uuid: 2e9eba1d6d154d92ba94550a7990aee8
+          name: 'Windows Security (ID4739)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4739$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'Domain Policy was changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: be69fa4f340541308bdd03b60a294458
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4739$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4739$],600s)=0'
+              name: 'Domain Policy was changed.'
+              priority: AVERAGE
+              description: 'Domain Policy was changed.'
+        - uuid: cd172c5b37094626bfe55b8b739c5ee7
+          name: 'Windows Security (ID4754)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4754$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A security-enabled universal group was created.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: c2b837f8d5d64e7bb97f67fbcdc878a9
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4754$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4754$],600s)=0'
+              name: 'A security-enabled universal group was created.'
+              priority: AVERAGE
+              description: 'A security-enabled universal group was created.'
+        - uuid: 79dcd738573b4ce1b9a5e9197b45b6a9
+          name: 'Windows Security (ID4755)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4755$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A security-enabled universal group was changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: f7946447597c40b390599570782fbf62
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4755$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4755$],600s)=0'
+              name: 'A security-enabled universal group was changed.'
+              priority: AVERAGE
+              description: 'A security-enabled universal group was changed.'
+        - uuid: 2860fd1a38654234845483fc03dd2f59
+          name: 'Windows Security (ID4764)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4764$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: |
+            A security-disabled group was deleted.
+            A group's type was changed.
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: aba1aac2b531420da90fc8ed2d371d6a
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4764$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4764$],600s)=0'
+              name: 'A security-disabled group was deleted'
+              priority: AVERAGE
+              description: 'A security-disabled group was deleted'
+        - uuid: 5ee1feecddba4a6091b33bb87ac303e7
           name: 'Windows Security (ID4765)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4765$]'
@@ -327,18 +407,15 @@ zabbix_export:
           value_type: LOG
           description: 'SID History was added to an account.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: a487677ce69a4413ac546d1833f51fab
+            - uuid: a487677ce69a4413ac546d1833f51fab
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4765$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4765$],600s)=0'
               name: 'SID History was added to an account.'
               priority: HIGH
               description: 'SID History was added to an account.'
-        -
-          uuid: 1d834f4c207b4475b757614288034d12
+        - uuid: 1d834f4c207b4475b757614288034d12
           name: 'Windows Security (ID4766)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4766$]'
@@ -348,18 +425,33 @@ zabbix_export:
           value_type: LOG
           description: 'An attempt to add SID History to an account failed.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: c94eebe949af4d709ac3af264620ded8
+            - uuid: c94eebe949af4d709ac3af264620ded8
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4766$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4766$],600s)=0'
               name: 'An attempt to add SID History to an account failed.'
               priority: HIGH
               description: 'An attempt to add SID History to an account failed.'
-        -
-          uuid: ebe785f574c34355a804fde24f0696c5
+        - uuid: 0519894159694b168bb285c0bb32ebc0
+          name: 'Windows Security (ID4780)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4780$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The ACL was set on accounts which are members of administrators groups.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 2ea99dffd2354e4cb5595826d6eef9cf
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4780$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4780$],600s)=0'
+              name: 'The ACL was set on accounts which are members of administrators groups.'
+              priority: AVERAGE
+              description: 'The ACL was set on accounts which are members of administrators groups.'
+        - uuid: ebe785f574c34355a804fde24f0696c5
           name: 'Windows Security (ID4794)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4794$]'
@@ -369,18 +461,87 @@ zabbix_export:
           value_type: LOG
           description: 'An attempt was made to set the Directory Services Restore Mode.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: a0ea0b45172349098afd703272107c7c
+            - uuid: a0ea0b45172349098afd703272107c7c
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4794$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4794$],600s)=0'
               name: 'An attempt was made to set the Directory Services Restore Mode.'
               priority: HIGH
               description: 'An attempt was made to set the Directory Services Restore Mode.'
-        -
-          uuid: fb338de56acc4806b36e83b784e40fd6
+        - uuid: 6f58a9b0d487435dab819d01079c8d7e
+          name: 'Windows Security (ID4816)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4816$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'RPC detected an integrity violation while decrypting an incoming message.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 925dc3c036344d0c8287d460cda7c7e1
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4816$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4816$],600s)=0'
+              name: 'RPC detected an integrity violation while decrypting an incoming message.'
+              priority: AVERAGE
+              description: 'RPC detected an integrity violation while decrypting an incoming message.'
+        - uuid: 7ea26f5a5920447e8e871af5a51e73da
+          name: 'Windows Security (ID4865)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4865$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A trusted forest information entry was added.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 95d55d62c1284f98b8778a7f2bded96a
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4865$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4865$],600s)=0'
+              name: 'A trusted forest information entry was added.'
+              priority: AVERAGE
+              description: 'A trusted forest information entry was added.'
+        - uuid: b496fd64a11e41f9a28c9e98fcd94e7f
+          name: 'Windows Security (ID4866)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4866$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A trusted forest information entry was removed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 00b67d9831d846b2a4480fb0bcab88d8
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4866$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4866$],600s)=0'
+              name: 'A trusted forest information entry was removed.'
+              priority: AVERAGE
+              description: 'A trusted forest information entry was removed.'
+        - uuid: e68ed46d785343c9bcd99cdb3683506d
+          name: 'Windows Security (ID4867)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4867$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'A trusted forest information entry was modified.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 93fcc320402742f985d25958a82c59e7
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4867$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4867$],600s)=0'
+              name: 'A trusted forest information entry was modified.'
+              priority: AVERAGE
+              description: 'A trusted forest information entry was modified.'
+        - uuid: fb338de56acc4806b36e83b784e40fd6
           name: 'Windows Security (ID4897)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4897$]'
@@ -390,18 +551,87 @@ zabbix_export:
           value_type: LOG
           description: 'Role separation enabled.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: f52470d0cd5a4d9bba7b75aa0b463fa6
+            - uuid: f52470d0cd5a4d9bba7b75aa0b463fa6
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4897$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4897$],600s)=0'
               name: 'Role separation enabled.'
               priority: HIGH
               description: 'Role separation enabled.'
-        -
-          uuid: ffafab1a7bbc431dad40bc8e0c6c8615
+        - uuid: 00a047b52a6041b49ba1ded40233656b
+          name: 'Windows Security (ID4906)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4906$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The CrashOnAuditFail value has changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 5c4d43cb81f44b349ef119f2687de579
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4906$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4906$],600s)=0'
+              name: 'The CrashOnAuditFail value has changed.'
+              priority: AVERAGE
+              description: 'The CrashOnAuditFail value has changed.'
+        - uuid: 26dd9ceb68954da1a445daf9fd741c99
+          name: 'Windows Security (ID4907)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4907$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'Auditing settings on object were changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 5e4a00c4848a4bc6b5d9fc6780f57d48
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4907$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4907$],600s)=0'
+              name: 'Auditing settings on object were changed.'
+              priority: AVERAGE
+              description: 'Auditing settings on object were changed.'
+        - uuid: 7a5b2e1b0187461788864ecc079405f1
+          name: 'Windows Security (ID4908)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4908$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'Special Groups Logon table modified.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: b3a9571145a94ee6af272f11d93e4dbe
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4908$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4908$],600s)=0'
+              name: 'Special Groups Logon table modified.'
+              priority: AVERAGE
+              description: 'Special Groups Logon table modified.'
+        - uuid: d248b62a41654b05ba6decf0d3c4cd1b
+          name: 'Windows Security (ID4912)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^4912$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'Per User Audit Policy was changed.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: dfa0c3014a414e9f8444a229d9a6cda9
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4912$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4912$],600s)=0'
+              name: 'Per User Audit Policy was changed.'
+              priority: AVERAGE
+              description: 'Per User Audit Policy was changed.'
+        - uuid: ffafab1a7bbc431dad40bc8e0c6c8615
           name: 'Windows Security (ID4964)'
           type: ZABBIX_ACTIVE
           key: 'eventlog[Security,,,,^4964$]'
@@ -411,34 +641,119 @@ zabbix_export:
           value_type: LOG
           description: 'Special groups have been assigned to a new logon.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 90304dde61524c9bbbc947e2f7dc1c2d
+            - uuid: 90304dde61524c9bbbc947e2f7dc1c2d
               expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4964$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^4964$],600s)=0'
               name: 'Special groups have been assigned to a new logon.'
               priority: HIGH
               description: 'Special groups have been assigned to a new logon.'
-        -
-          uuid: 4803301328a94f6184cfe2376788ee57
-          name: 'Windows Security (ID5124)'
+        - uuid: 41d68b542e6e4806ab6a5ba768e6481c
+          name: 'Windows Security (ID5027)'
           type: ZABBIX_ACTIVE
-          key: 'eventlog[Security,,,,^5124$]'
+          key: 'eventlog[Security,,,,^5027$]'
           delay: 5m
           history: 1w
           trends: '0'
           value_type: LOG
-          description: 'A security setting was updated on the OCSP Responder Service.'
+          description: 'The Windows Firewall Service was unable to retrieve the security policy from the local storage. The service will continue enforcing the current policy.'
           tags:
-            -
-              tag: Application
+            - tag: Application
               value: 'Security events'
           triggers:
-            -
-              uuid: 1c72af6be4e940c1b18e4069e60d2a88
-              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5124$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5124$],600s)=0'
-              name: 'A security setting was updated on the OCSP Responder Service'
-              priority: HIGH
-              description: 'A security setting was updated on the OCSP Responder Service'
+            - uuid: bac38986492d4d818bfd6fbca3233862
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5027$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5027$],600s)=0'
+              name: 'The Windows Firewall Service was unable to retrieve the security policy from the local storage.'
+              priority: AVERAGE
+              description: 'The Windows Firewall Service was unable to retrieve the security policy from the local storage. The service will continue enforcing the current policy.'
+        - uuid: 81df333fb0c24fecbee203fcb752a0bd
+          name: 'Windows Security (ID5028)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^5028$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The Windows Firewall Service was unable to parse the new security policy. The service will continue with currently enforced policy.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: d9695630aae74a36b0d205b12aa87922
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5028$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5028$],600s)=0'
+              name: 'The Windows Firewall Service was unable to parse the new security policy.'
+              priority: AVERAGE
+              description: 'The Windows Firewall Service was unable to parse the new security policy. The service will continue with currently enforced policy.'
+        - uuid: fa1d90b1387f4faeabbb1087bdaae03c
+          name: 'Windows Security (ID5029)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^5029$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The Windows Firewall Service failed to initialize the driver. The service will continue to enforce the current policy.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 9b2dc6fda626475bb3fff7663aee1b4a
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5029$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5029$],600s)=0'
+              name: 'The Windows Firewall Service failed to initialize the driver.'
+              priority: AVERAGE
+              description: 'The Windows Firewall Service failed to initialize the driver. The service will continue to enforce the current policy.'
+        - uuid: c0456e685470400eb9930e3a45059f41
+          name: 'Windows Security (ID5030)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^5030$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The Windows Firewall Service failed to start.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: 0c75f7566f8c4be3b9b808b59ef0aa18
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5030$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5030$],600s)=0'
+              name: 'The Windows Firewall Service failed to start.'
+              priority: AVERAGE
+              description: 'The Windows Firewall Service failed to start.'
+        - uuid: 7e5672bb3e804e5289642c5f95dacc28
+          name: 'Windows Security (ID5035)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^5035$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The Windows Firewall Driver failed to start.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: a20e81d178b841899d2ed345c929061e
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5035$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5035$],600s)=0'
+              name: 'The Windows Firewall Driver failed to start.'
+              priority: AVERAGE
+              description: 'The Windows Firewall Driver failed to start.'
+        - uuid: c5fe9a718443427a9d23c295c24b335d
+          name: 'Windows Security (ID5037)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,^5037$]'
+          delay: 5m
+          history: 1w
+          trends: '0'
+          value_type: LOG
+          description: 'The Windows Firewall Driver detected critical runtime error. Terminating.'
+          tags:
+            - tag: Application
+              value: 'Security events'
+          triggers:
+            - uuid: cd47c32b73e640cbaf5f27f624155950
+              expression: 'logseverity(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5037$])>1 and nodata(/AD DS Monitoring and Attack Detection/eventlog[Security,,,,^5037$],600s)=0'
+              name: 'The Windows Firewall Driver detected critical runtime error. Terminating.'
+              priority: AVERAGE
+              description: 'The Windows Firewall Driver detected critical runtime error. Terminating.'
