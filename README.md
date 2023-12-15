@@ -8,7 +8,7 @@ The folder contains zabbix template for Active Directory and based on MS documen
 - Capacity Planning for Active Directory Domain Services
 - How to do performance tuning for NTLM authentication by using the MaxConcurrentApi setting
 
-## [AD DS Monitoring and Attack Detection](https://github.com/NikonovAleksei/zabbix/wiki/AD-DS-Monitoring-and-Attack-Detection)
+## [AD DS Monitoring and Attack Detection v 2.00](https://github.com/NikonovAleksei/zabbix/wiki/AD-DS-Monitoring-and-Attack-Detection)
 Active Directory Monitoring and Attack Detection:
 
 Template based on MS document 
