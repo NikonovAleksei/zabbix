@@ -1,0 +1,105 @@
+zabbix_export:
+  version: '6.0'
+  date: '2024-01-31T07:20:04Z'
+  groups:
+    - uuid: b9390195ecad4986968746a2a9b56354
+      name: 'My Templates'
+  templates:
+    - uuid: 6eac039be9f640be943bc77d22573fef
+      template: 'Template Windows RDS Session'
+      name: 'Template Windows RDS Session'
+      description: |
+        Template tooling version used: 1.00
+                
+        https://github.com/NikonovAleksei/zabbix/
+                
+        https://t.me/ad_zabbix_templates
+      groups:
+        - name: 'My Templates'
+      items:
+        - uuid: 3f3ab63fb4a442a4ba04cb0148d61dc7
+          name: 'Login to RDS Server'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Windows-TerminalServices-LocalSessionManager/Operational,,"Information",,^21$]'
+          delay: 30s
+          trends: '0'
+          value_type: LOG
+          tags:
+            - tag: Application
+              value: 'RDS Events'
+        - uuid: be6377c640bb41f5a24e00231eec8f72
+          name: 'Logoff form RDS Server'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Windows-TerminalServices-LocalSessionManager/Operational,,"Information",,^23$]'
+          delay: 30s
+          trends: '0'
+          value_type: LOG
+          tags:
+            - tag: Application
+              value: 'RDS Events'
+        - uuid: 6602dde0d28945fe91ec7ca8f09a5e03
+          name: 'RDS Port'
+          key: 'net.tcp.listen[3389]'
+          tags:
+            - tag: Application
+              value: RDS
+          triggers:
+            - uuid: e73a5517fb694cd68cfebeb67dfd6aeb
+              expression: 'last(/Template Windows RDS Session/net.tcp.listen[3389])=0'
+              name: 'RDS Port is down on {HOST.NAME}'
+              priority: HIGH
+        - uuid: 79d0888253334aa8affb80fce6feae15
+          name: 'RDS Active sessions'
+          key: 'perf_counter[\Terminal Services\Active sessions]'
+          history: 1w
+          tags:
+            - tag: Application
+              value: RDS
+        - uuid: 8ce6c18ff883491fb38654c4c360f418
+          name: 'RDS Inactive sessions'
+          key: 'perf_counter[\Terminal Services\Inactive Sessions]'
+          history: 1w
+          tags:
+            - tag: Application
+              value: RDS
+        - uuid: 63353a6e34794494a325b8f18993ecf8
+          name: 'RDS Total sessions'
+          key: 'perf_counter[\Terminal Services\Total sessions]'
+          history: 1w
+          tags:
+            - tag: Application
+              value: RDS
+        - uuid: dba1346787114f2bb1f86b4032eddab3
+          name: 'State of service TermService (Remote Desktop Services)'
+          key: 'service.rds.info[TermService,state]'
+          history: 1d
+          tags:
+            - tag: Application
+              value: Services
+          triggers:
+            - uuid: 4bde7dc4b2be41a19363c1d9924703f5
+              expression: 'min(/Template Windows RDS Session/service.rds.info[TermService,state],#3)>0'
+              name: 'Service TermService (Remote Desktop Services) is not running (startup type automatic)'
+              priority: HIGH
+  graphs:
+    - uuid: 05283993861740e8ba894eee8d4ceeb6
+      name: 'RDS Sessions'
+      ymin_type_1: FIXED
+      graph_items:
+        - color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: 'Template Windows RDS Session'
+            key: 'perf_counter[\Terminal Services\Total sessions]'
+        - sortorder: '1'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: 'Template Windows RDS Session'
+            key: 'perf_counter[\Terminal Services\Active sessions]'
+        - sortorder: '2'
+          color: 2774A4
+          calc_fnc: ALL
+          item:
+            host: 'Template Windows RDS Session'
+            key: 'perf_counter[\Terminal Services\Inactive Sessions]'

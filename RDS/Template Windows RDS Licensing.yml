@@ -1,0 +1,31 @@
+zabbix_export:
+  version: '6.0'
+  date: '2024-01-31T07:22:27Z'
+  groups:
+    - uuid: b9390195ecad4986968746a2a9b56354
+      name: 'My Templates'
+  templates:
+    - uuid: 7a215b9c3c5b4115ba7ab37ddaf7ddd4
+      template: 'Template Windows RDS Licensing'
+      name: 'Template Windows RDS Licensing'
+      description: |
+        Template tooling version used: 1.00
+                
+        https://github.com/NikonovAleksei/zabbix/
+                
+        https://t.me/ad_zabbix_templates
+      groups:
+        - name: 'My Templates'
+      items:
+        - uuid: be9676f04a1143f19a5a0255a8b0ce07
+          name: 'State of service "termservlicensing" (Remote Desktop Licensing)'
+          key: 'service_state[termservlicensing]'
+          history: 1d
+          tags:
+            - tag: Application
+              value: Services
+          triggers:
+            - uuid: f1d13eb75f7a4145853ea99da12174e3
+              expression: 'min(/Template Windows RDS Licensing/service_state[termservlicensing],#3)<>0'
+              name: 'Service "Tssdis" (Remote Desktop Licensing) is not running'
+              priority: HIGH

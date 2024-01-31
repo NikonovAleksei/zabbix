@@ -1,0 +1,96 @@
+zabbix_export:
+  version: '6.0'
+  date: '2024-01-31T07:20:46Z'
+  groups:
+    - uuid: b9390195ecad4986968746a2a9b56354
+      name: 'My Templates'
+  templates:
+    - uuid: 160344450f9e4017b0d8f40d46ba3fe6
+      template: 'Template Windows RDS Gateway'
+      name: 'Template Windows RDS Gateway'
+      description: |
+        Template tooling version used: 1.00
+                
+        https://github.com/NikonovAleksei/zabbix/
+                
+        https://t.me/ad_zabbix_templates
+      groups:
+        - name: 'My Templates'
+      items:
+        - uuid: 4b33a7026fe54d7880f852b81815237f
+          name: 'The user did not meet connection authorization policy requirements'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Windows-TerminalServices-Gateway/Operational,,"Error",,^201$]'
+          delay: 30s
+          trends: '0'
+          value_type: LOG
+          request_method: POST
+          tags:
+            - tag: Application
+              value: 'RDS Events'
+          triggers:
+            - uuid: 1e6eb0811820497daaee3854fe426ab1
+              expression: 'logeventid(/Template Windows RDS Gateway/eventlog[Microsoft-Windows-TerminalServices-Gateway/Operational,,"Error",,^201$],,"201")=1 and nodata(/Template Windows RDS Gateway/eventlog[Microsoft-Windows-TerminalServices-Gateway/Operational,,"Error",,^201$],60s)=0'
+              name: 'The user ( {{ITEM.VALUE}.iregsub("(\w.+[: {$DOMAIN}].*)","\1")}), on "{HOST.NAME}", RDS didn''t allow connection'
+              priority: WARNING
+        - uuid: 11ad220b7c5a4662b20f5486e7684bc8
+          name: 'RDS GW Port'
+          key: 'net.tcp.listen[{$RDS.GW.PORT}]'
+          delay: 30s
+          tags:
+            - tag: Application
+              value: RDS
+          triggers:
+            - uuid: 9ec33bef017149ecb7a3a69a5e9fa3f3
+              expression: 'last(/Template Windows RDS Gateway/net.tcp.listen[{$RDS.GW.PORT}],#1:now-0)=0'
+              name: 'RDS GW Port is down on {HOST.NAME}'
+              priority: HIGH
+        - uuid: e8eff81eb85d4a0f9accd1becfc7af5a
+          name: 'RDS Current sessions'
+          key: 'perf_counter[\Terminal Service Gateway\Current connections]'
+          delay: 5m
+          description: 'perf_counter[\8676\8682]'
+          tags:
+            - tag: Application
+              value: RDS
+        - uuid: caa18599054f42b884003ff8d6e932e3
+          name: 'State of service "IAS" (Network Policy Server)'
+          key: 'service_state[IAS]'
+          history: 1d
+          description: 'To resolve this issue, ensure that the Network Policy Server service is started.'
+          tags:
+            - tag: Application
+              value: Services
+          triggers:
+            - uuid: 4659079a54ff43988bf409e4700c2eb4
+              expression: 'min(/Template Windows RDS Gateway/service_state[IAS],#3)<>0'
+              name: 'Service "IAS" (Network Policy Server) is not running'
+              priority: HIGH
+        - uuid: d203279b2f7249aca399e249450823d9
+          name: 'State of service "RPCHTTPLBS" (RPC/HTTP Load Balancing Service)'
+          key: 'service_state[RPCHTTPLBS]'
+          history: 1d
+          tags:
+            - tag: Application
+              value: Services
+          triggers:
+            - uuid: 92391fe1e8f24351a358857a5c91fb22
+              expression: 'min(/Template Windows RDS Gateway/service_state[RPCHTTPLBS],#3)<>0'
+              name: 'Service "RPCHTTPLBS" (RPC/HTTP Load Balancing Service) is not running'
+              priority: HIGH
+        - uuid: bd80a3612bd9436ea07018b1a4806276
+          name: 'State of service "TSGateway" (Remote Desktop Gateway)'
+          key: 'service_state[TSGateway]'
+          history: 1d
+          description: 'To resolve this issue, restart the Remote Desktop Gateway service. Restarting the Remote Desktop Gateway service also restarts all dependent services.'
+          tags:
+            - tag: Application
+              value: Services
+          triggers:
+            - uuid: a351c05a77044ddaaf8bd78ab984150f
+              expression: 'min(/Template Windows RDS Gateway/service_state[TSGateway],#3)<>0'
+              name: 'Service "TSGateway" (Remote Desktop Gateway) is not running'
+              priority: HIGH
+      macros:
+        - macro: '{$RDS.GW.PORT}'
+          value: '443'

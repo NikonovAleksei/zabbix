@@ -1,0 +1,31 @@
+zabbix_export:
+  version: '6.0'
+  date: '2024-01-31T07:21:10Z'
+  groups:
+    - uuid: b9390195ecad4986968746a2a9b56354
+      name: 'My Templates'
+  templates:
+    - uuid: dd20877844654c37a114d909ef4be4aa
+      template: 'Template Windows RDS Broker'
+      name: 'Template Windows RDS Broker'
+      description: |
+        Template tooling version used: 1.00
+                
+        https://github.com/NikonovAleksei/zabbix/
+                
+        https://t.me/ad_zabbix_templates
+      groups:
+        - name: 'My Templates'
+      items:
+        - uuid: d6cc74534ca4405f90a905c468919abd
+          name: 'State of service "Tssdis" (Remote Desktop Connection Broker)'
+          key: 'service_state[Tssdis]'
+          history: 1d
+          tags:
+            - tag: Application
+              value: Services
+          triggers:
+            - uuid: 4a58f13d64aa4dcbbf4065fbf5dd3399
+              expression: 'min(/Template Windows RDS Broker/service_state[Tssdis],#3)<>0'
+              name: 'Service "Tssdis" (Remote Desktop Connection Broker) is not running'
+              priority: HIGH
