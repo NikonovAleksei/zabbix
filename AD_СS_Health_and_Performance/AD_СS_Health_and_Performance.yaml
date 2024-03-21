@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2024-01-31T07:15:14Z'
+  date: '2024-03-21T13:33:23Z'
   groups:
     - uuid: b9390195ecad4986968746a2a9b56354
       name: 'My Templates'
@@ -9,7 +9,7 @@ zabbix_export:
       template: 'AD CS Health and Monitoring'
       name: 'AD CS Health and Monitoring'
       description: |
-        Template tooling version used: 1.10
+        Template tooling version used: 1.11
         
         https://github.com/NikonovAleksei/zabbix/
         
@@ -24,6 +24,9 @@ zabbix_export:
           delay: 5m
           trends: '0'
           value_type: LOG
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
         - uuid: 7b60d89fdab447c0b3ff3ab438fbc590
           name: 'CertificationAuthority (ID15)'
           type: ZABBIX_ACTIVE
@@ -32,6 +35,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Active Directory Certificate Services did not start: Version does not match certif.dll.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 1bb8f52688b5490cb4411413171e44b8
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^15$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^15$],600s)=0'
@@ -46,6 +52,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Active Directory Certificate Services unrevoked the certificate for request %1 for %2.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: c289223480a54523b40c4d58cc915ec8
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^55$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^55$],600s)=0'
@@ -60,6 +69,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Active Directory Certificate Services refused to process an extremely long request from %1. This may indicate a denial-of-service attack. If the request was rejected in error, modify the MaxIncomingMessageSize registry parameter via certutil -setreg CA\MaxIncomingMessageSize <bytes>.  Unless verbose logging is enabled, this error will not be logged again for 20 minutes.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 084ca93dfcf94698be641624006d7f65
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^60$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^60$],600s)=0'
@@ -74,6 +86,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Security permissions are corrupted or missing.  The Active Directory Certificate Services may need to be reinstalled.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 6287aaf65f69431d9dee58151cef3db6
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^95$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Application,,,"Microsoft-Windows-CertificationAuthority",^95$],600s)=0'
@@ -87,6 +102,9 @@ zabbix_export:
           delay: 30s
           trends: '0'
           value_type: LOG
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 8d2702a6ca1f46ae824c4a086901a9b4
               expression: 'count(/AD CS Health and Monitoring/eventlog[Security,,,,^4657$],90s,"like","EKUOIDsForPublishExpiredCertInCRL")=1'
@@ -150,6 +168,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'The certificate manager denied a pending certificate request.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 91055ea7f67a42bba2a5621700142445
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4868$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4868$],600s)=0'
@@ -164,6 +185,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Certificate Services revoked a certificate.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 0810c82bb279479da1cfe0750e957715
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4870$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4870$],600s)=0'
@@ -178,6 +202,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A certificate request extension changed.   Request ID: %1 Name: %2 Type: %3 Flags: %4 Data: %5'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 9eb02dafcadc4f84bb29a399ab314a1a
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4873$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4873$],600s)=0'
@@ -192,6 +219,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'One or more certificate request attributes changed.   Request ID: %1 Attributes: %2'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 00288391d0cd40b98beabe0bab879835
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4874$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4874$],600s)=0'
@@ -206,6 +236,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'The security permissions for Certificate Services changed.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 18e1f87c07ba49d787ca267bea9d8135
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4882$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4882$],600s)=0'
@@ -220,6 +253,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Certificate Services retrieved an archived key.   Request ID: %1'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 84804ac52ab9436a9d16aee7534092f6
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4883$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4883$],600s)=0'
@@ -234,6 +270,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'The audit filter for Certificate Services changed.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: e8ae0c5637394863b81eff141b08debd
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4885$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4885$],600s)=0'
@@ -248,6 +287,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Certificate Services approved a certificate request and issued a certificate.   Request ID: %1 Requester: %2 Attributes: %3 Disposition: %4 SKI:  %5 Subject: %6'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 80db3f51472248fc84f4235330b8f57d
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4887$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4887$],600s)=0'
@@ -262,6 +304,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Certificate Services denied a certificate request.   Request ID: %1 Requester: %2 Attributes: %3 Disposition: %4 SKI:  %5 Subject: %6'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 5fb2ed69fb364653bb0f58ec4a47a6be
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4888$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4888$],600s)=0'
@@ -276,6 +321,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'The certificate manager settings for Certificate Services changed.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 20ff500a3d9a4409b0804351000beadf
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4890$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4890$],600s)=0'
@@ -290,6 +338,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A configuration entry changed in Certificate Services.   Node: %1 Entry: %2 Value: %3'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 8a0670ecdf4b4ce0b4b913df392dbede
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4891$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4891$],600s)=0'
@@ -304,6 +355,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A property of Certificate Services changed.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: a99b1b7cdbbf46c3b1fea771b3262130
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4892$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4892$],600s)=0'
@@ -318,6 +372,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'One or more rows have been deleted from the certificate database.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 23bf0198ccac4e28a78bdfee7a7ae59b
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4896$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4896$],600s)=0'
@@ -332,6 +389,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Role separation enabled: %1'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 8cb098688c364616b83f40a300a793b0
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4897$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4897$],600s)=0'
@@ -347,6 +407,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Certificate Services loaded a template.  %1 v%2 (Schema V%3) %4 %5  Template Information:  Template Content:  %7  Security Descriptor:  %8  Additional Information:  Domain Controller: %6'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: a0e87a76dd24425a8e1c0e5b8739b868
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4898$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4898$],600s)=0'
@@ -362,6 +425,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A Certificate Services template was updated.  %1 v%2 (Schema V%3) %4 %5  Template Change Information:  Old Template Content: %8  New Template Content:  %7  Additional Information:  Domain Controller: %6'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 14c1debb92a043fdb00c14c4d3e0fc6d
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4899$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4899$],600s)=0'
@@ -376,6 +442,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'Certificate Services template security was updated.  %1 v%2 (Schema V%3) %4 %5  Template Change Information:  Old Template Content:  %9  New Template Content: %7  Old Security Descriptor:  %10  New Security Descriptor:  %8  Additional Information:  Domain Controller: %6'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 0bb54f1d22c74629a95514b51c481f6e
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^4900$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^4900$],600s)=0'
@@ -390,6 +459,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'OCSP Responder Service Started'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 77d6c23c1b7f4394a90989c4cb432421
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^5120$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^5120$],600s)=0'
@@ -404,6 +476,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'OCSP Responder Service Stopped'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: fe58dde3a9a447cba2661798058aa927
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^5121$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^5121$],600s)=0'
@@ -418,6 +493,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A configuration entry changed in OCSP Responder Service'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 35d99c6bd23246929eee35c9fc94c49d
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^5122$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^5122$],600s)=0'
@@ -432,6 +510,9 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A configuration entry changed in OCSP Responder Service'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: b91666738edd4219bf4f602a98f9791b
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^5123$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^5123$],600s)=0'
@@ -446,12 +527,55 @@ zabbix_export:
           trends: '0'
           value_type: LOG
           description: 'A security setting was updated on the OCSP Responder Service.'
+          tags:
+            - tag: Application
+              value: 'AD СS Events'
           triggers:
             - uuid: 38c56cb7889849d989692455e2803750
               expression: 'logseverity(/AD CS Health and Monitoring/eventlog[Security,,,,^5124$])>1 and nodata(/AD CS Health and Monitoring/eventlog[Security,,,,^5124$],600s)=0'
               name: 'A security setting was updated on the OCSP Responder Service.'
               priority: HIGH
               manual_close: 'YES'
+        - uuid: ca68dfbd2f0140c6bb1d00e327adb13a
+          name: 'Failed Requests/sec'
+          key: 'perf_counter_en[\Certification Authority(_Total)\Failed Requests/sec]'
+          history: 1w
+          value_type: FLOAT
+          units: Requests/sec
+          description: 'This monitor returns the number of failed certificate requests processed per second.'
+          tags:
+            - tag: Application
+              value: 'AD СS Performance'
+        - uuid: f6dce5c171104f328822423320e66e19
+          name: 'Pending Requests/sec'
+          key: 'perf_counter_en[\Certification Authority(_Total)\Pending Requests/sec]'
+          history: 1w
+          value_type: FLOAT
+          units: Requests/sec
+          description: 'This monitor returns the number of pending certificate requests processed per second.'
+          tags:
+            - tag: Application
+              value: 'AD СS Performance'
+        - uuid: 0462a2a60dcb448bbe35a2a8c044bf05
+          name: Requests/sec
+          key: 'perf_counter_en[\Certification Authority(_Total)\Requests/sec]'
+          history: 1w
+          value_type: FLOAT
+          units: Requests/sec
+          description: 'This monitor returns the number of certificate requests processed per second.'
+          tags:
+            - tag: Application
+              value: 'AD СS Performance'
+        - uuid: 27835a46d09e493cae5f278db0d08bab
+          name: Retrievals/sec
+          key: 'perf_counter_en[\Certification Authority(_Total)\Retrievals/sec]'
+          history: 1w
+          value_type: FLOAT
+          units: Requests/sec
+          description: 'This monitor returns the number of certificate retrieval requests processed per second.'
+          tags:
+            - tag: Application
+              value: 'AD СS Performance'
         - uuid: f909d3aa0ab84136ba71296717acd387
           name: 'State of service "certsvc" (Certificate Services)'
           key: 'service.info[certsvc,state]'
@@ -467,6 +591,17 @@ zabbix_export:
               name: '"Certsvc" (Certificate Services) is not running'
               priority: AVERAGE
               description: 'The service has a state other than "Running" for the last three times.'
+        - uuid: 77e2032afa1140ea9ce5c2b8e110e419
+          name: 'CertDB Size'
+          key: 'vfs.dir.size["{$CSDB_PATH}"]'
+          delay: 24h
+          units: Bytes
+          tags:
+            - tag: Application
+              value: 'AD CS Services'
+      macros:
+        - macro: '{$CSDB_PATH}'
+          value: 'c:\windows\Systen32\CertLog'
       valuemaps:
         - uuid: 0b683fa7d30c4ced99bbd40128ced1ef
           name: 'Service state'
@@ -496,3 +631,31 @@ zabbix_export:
               newvalue: Unknown
             - value: '255'
               newvalue: 'No such service'
+  graphs:
+    - uuid: b28412c059d944a2bc34919aa8fb886c
+      name: 'Сertificate requests'
+      ymin_type_1: FIXED
+      graph_items:
+        - color: FF0000
+          calc_fnc: ALL
+          item:
+            host: 'AD CS Health and Monitoring'
+            key: 'perf_counter_en[\Certification Authority(_Total)\Failed Requests/sec]'
+        - sortorder: '1'
+          color: 0040FF
+          calc_fnc: ALL
+          item:
+            host: 'AD CS Health and Monitoring'
+            key: 'perf_counter_en[\Certification Authority(_Total)\Pending Requests/sec]'
+        - sortorder: '2'
+          color: 00FF00
+          calc_fnc: ALL
+          item:
+            host: 'AD CS Health and Monitoring'
+            key: 'perf_counter_en[\Certification Authority(_Total)\Requests/sec]'
+        - sortorder: '3'
+          color: F7941D
+          calc_fnc: ALL
+          item:
+            host: 'AD CS Health and Monitoring'
+            key: 'perf_counter_en[\Certification Authority(_Total)\Retrievals/sec]'
