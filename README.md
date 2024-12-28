@@ -14,16 +14,18 @@ Active Directory Monitoring and Attack Detection:
 Template based on MS document 
 - Best Practices for Securing Active Directory
 
+## AD DS Security Audit
+
+# Active Directory Certification Services monitoring with Zabbix  
 ## [AD CS Health and Monitoring v 1.11](https://github.com/NikonovAleksei/zabbix/wiki/AD-CS-Health-and-Monitoring)
 Active Directory Certification Services Health and Monitoring
 
 Template based on MS documents
 - Securing Public Key Infrastructure (PKI)
 
+# Remote Desktop Services
 ## [RDS v1.00]((https://github.com/NikonovAleksei/zabbix/wiki/RDS))
 - Template Windows RDS Broker
 - Template Windows RDS Gateway
 - Template Windows RDS Licensing
 - Template Windows RDS Session
-
-## AD DS Security Audit
