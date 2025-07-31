@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2024-12-28T06:46:06Z'
+  date: '2025-07-31T13:02:28Z'
   groups:
     - uuid: b9390195ecad4986968746a2a9b56354
       name: 'My Templates'
@@ -9,7 +9,7 @@ zabbix_export:
       template: 'AD DS Health and Performance'
       name: 'AD DS Health and Performance'
       description: |
-        Template tooling version used: 2.06
+        Template tooling version used: 2.10
         
         https://github.com/NikonovAleksei/zabbix/
         
@@ -17,6 +17,32 @@ zabbix_export:
       groups:
         - name: 'My Templates'
       items:
+        - uuid: 02053db91d1049bbae17151422d2a5e0
+          name: 'ATQ Threads Max'
+          type: CALCULATED
+          key: ATQThreadsMax
+          delay: 1d
+          history: 1w
+          params: '4 * last(//wmi.get[root/cimv2,"Select NumberOfLogicalProcessors from Win32_ComputerSystem"])'
+          description: 'LDAP MaxPoolThreads (Default to 4) and CPUs'
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+            - tag: component
+              value: ATQ
+        - uuid: 9c8eb367ba9c4122b21defdf0707a89d
+          name: 'Baseline - DNS Total Query Received/sec'
+          type: CALCULATED
+          key: dns.query.rec.avg7d
+          delay: 30m
+          history: 1w
+          value_type: FLOAT
+          params: '1.1*max(//perf_counter_en[\DNS\Total Query Received/sec],7d)'
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+            - tag: component
+              value: DNS
         - uuid: 510bed9780f54dbc94521c1afbd668b0
           name: 'Active Directory Web Services Events'
           type: ZABBIX_ACTIVE
@@ -32,6 +58,7 @@ zabbix_export:
             - uuid: 09121ac7fa8a4b64b8b6f45acdd64b4d
               expression: 'logseverity(/AD DS Health and Performance/eventlog[Active Directory Web Services,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Active Directory Web Services,,"Warning|Error|Critical"],1800s)=0'
               name: 'Active Directory Web Services Error on {HOST.NAME}'
+              status: DISABLED
         - uuid: 6e038f783e4b44dc81038d0e3c3c7baf
           name: 'DFS Replication Events'
           type: ZABBIX_ACTIVE
@@ -43,10 +70,13 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Events'
+            - tag: component
+              value: DFS
           triggers:
             - uuid: bf64470533d0470895cdebd814a37dc2
               expression: 'logseverity(/AD DS Health and Performance/eventlog[DFS Replication,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[DFS Replication,,"Warning|Error|Critical"],1800s)=0'
               name: 'DFS Replication Events Error on {HOST.NAME}'
+              status: DISABLED
         - uuid: 3bc63708ad4340b08d7d50f3d7af7129
           name: 'Directory Service Events'
           type: ZABBIX_ACTIVE
@@ -66,6 +96,7 @@ zabbix_export:
             - uuid: 79e002ed7b0c4bff92ca5461083c0ba0
               expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0'
               name: 'Directory Service Events Error on {HOST.NAME}'
+              status: DISABLED
             - uuid: 2a91cf8e09c24cc1a5aea2d19bb1b85d
               expression: 'logseverity(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],1800s)=0 and logeventid(/AD DS Health and Performance/eventlog[Directory Service,,"Warning|Error|Critical"],,"2042")=1'
               recovery_mode: NONE
@@ -95,11 +126,14 @@ zabbix_export:
           value_type: LOG
           tags:
             - tag: Application
-              value: 'AD DS Events'
+              value: 'AD DS Performance'
+            - tag: component
+              value: DNS
           triggers:
             - uuid: a600b41075964c11a5ddccd0989e3192
               expression: 'logseverity(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"])>1 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],1800s)=0'
               name: 'DNS Server Events Error on {HOST.NAME}'
+              status: DISABLED
             - uuid: e565c96b940c4ef0bb7b4b500678a98b
               expression: 'logseverity(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"])=2 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],600s)=0 and logeventid(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],,"4515")=0'
               name: 'Duplicate DNS zones were detected on {HOST.NAME}'
@@ -144,6 +178,13 @@ zabbix_export:
               name: 'NtpClient was unable to set a manual peer to use as a time source on {HOST.NAME}'
               priority: WARNING
               manual_close: 'YES'
+            - uuid: 400c1dd6079c442cb035627b25c48d98
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[System,"Time-Service","Warning|Error|Critical"])=4 and nodata(/AD DS Health and Performance/eventlog[System,"Time-Service","Warning|Error|Critical"],600s)=0 and logeventid(/AD DS Health and Performance/eventlog[System,"Time-Service","Warning|Error|Critical"],,"4")=1'
+              recovery_mode: NONE
+              name: 'The kerberos client received a KRB_AP_ERR_MODIFIED error on {HOST.NAME}'
+              url: 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/kerberos-event-4-access-denied'
+              priority: WARNING
+              manual_close: 'YES'
         - uuid: 1bc801ab1b39417ea4bafcc00291991d
           name: 'NETLOGON Events'
           type: ZABBIX_ACTIVE
@@ -160,6 +201,19 @@ zabbix_export:
               expression: 'logseverity(/AD DS Health and Performance/eventlog[System,,"Error","NETLOGON",^5723$])>1 and nodata(/AD DS Health and Performance/eventlog[System,,"Error","NETLOGON",^5723$],1800s)=0'
               name: 'Netlogon Error on {HOST.NAME}'
               priority: WARNING
+        - uuid: 57b3c04eb9d640369af1b6c0836b24df
+          name: 'Baseline - LDAP Client Sessions'
+          type: CALCULATED
+          key: ldap.client.session.avg7d
+          delay: 30m
+          history: 1w
+          value_type: FLOAT
+          params: '1.1*max(//perf_counter_en[\NTDS\LDAP Client Sessions],7d)'
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: 24fd27b171794bc79fdad0e79109f335
           name: 'LogFile (Netlogon)'
           type: ZABBIX_ACTIVE
@@ -189,36 +243,68 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-        - uuid: 91dc10e30b9244cc8584124a159d303c
-          name: 'LDAP Port is running'
-          type: SIMPLE
-          key: 'net.tcp.service[ldap]'
+        - uuid: f13c111c5669475da6862558389d5174
+          name: 'LDAP Port 389'
+          key: 'net.tcp.listen[389]'
           history: 1w
           valuemap:
             name: 'Service state'
           tags:
             - tag: Application
               value: 'AD DS Network ports'
-          triggers:
-            - uuid: 261faef601b54be4acc42985f5f3d88f
-              expression: 'max(/AD DS Health and Performance/net.tcp.service[ldap],#3)=0'
-              name: 'LDAP service is down on {HOST.NAME}'
-              priority: AVERAGE
+            - tag: component
+              value: LDAP
+        - uuid: 539c7e58919c4969ad3400a8aa39d548
+          name: 'Kerberos Port 464'
+          key: 'net.tcp.listen[464]'
+          history: 1w
+          valuemap:
+            name: 'Service state'
+          tags:
+            - tag: Application
+              value: 'AD DS Network ports'
+        - uuid: 5bf4d465cc8149abaf8c6c03277f5e81
+          name: 'LDAPS Port 636'
+          key: 'net.tcp.listen[636]'
+          history: 1w
+          valuemap:
+            name: 'Service state'
+          tags:
+            - tag: Application
+              value: 'AD DS Network ports'
+            - tag: component
+              value: LDAP
+        - uuid: 718d90c8fde049e69ad2cb7ddb5fe937
+          name: 'Global Catalog Port 3268'
+          key: 'net.tcp.listen[3268]'
+          history: 1w
+          valuemap:
+            name: 'Service state'
+          tags:
+            - tag: Application
+              value: 'AD DS Network ports'
+        - uuid: f768630a78a647d78cf209529bfcd92c
+          name: 'Global Catalog Port 3269'
+          key: 'net.tcp.listen[3269]'
+          history: 1w
+          valuemap:
+            name: 'Service state'
+          tags:
+            - tag: Application
+              value: 'AD DS Network ports'
         - uuid: 9422a131df6d413dbbd41036ed51a0e6
           name: 'Database Cache % Hit'
           key: 'perf_counter_en[\Database(lsass)\Database Cache % Hit]'
           history: 1w
           value_type: FLOAT
           units: '%'
-          description: |
-            Database Cache % Hit of LSASS
-            perf_counter_en[\Database(lsass)\Database Cache % Hit]
+          description: 'The "Database Cache % Hit" performance counter for LSASS (Local Security Authority Subsystem Service) indicates the percentage of database queries that are served from the cache, rather than requiring a disk read. A high hit rate (ideally above 90%) signifies efficient database access, while a low hit rate might indicate performance bottlenecks related to disk I/O or insufficient memory allocated for caching.'
           tags:
             - tag: Application
               value: 'AD DS Performance'
           triggers:
             - uuid: cd80f7b81de4450aac5eaa7044625269
-              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database(lsass)\Database Cache % Hit],5m)<90'
+              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Database(lsass)\Database Cache % Hit],15m)<90'
               name: 'Database Cache % Hit < 90 % on {HOST.NAME}'
               priority: WARNING
         - uuid: 3db6e037983940d9be2c778c5d4bfade
@@ -227,7 +313,7 @@ zabbix_export:
           history: 1w
           value_type: FLOAT
           units: /s
-          description: 'perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Database Reads/sec]'
+          description: '"I/O Database Reads/sec ntdsa" refers to the rate at which read operations are performed on the Active Directory database (NTDS.dit) on a Windows server. This metric, measured in reads per second, indicates how frequently the server is accessing the Active Directory database to retrieve information. High values can suggest potential performance bottlenecks, especially if the server is experiencing slow response times.'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -242,7 +328,7 @@ zabbix_export:
           history: 1w
           value_type: FLOAT
           units: ms
-          description: 'perf_counter_en[\Database ==> Instances(lsass/NTDSA)\I/O Database Reads Average Latency]'
+          description: '"I/O Database Reads Average Latency (IODBReadsAvgLatency)" refers to the average time it takes for a database read operation to complete, measured in milliseconds. This metric is crucial for assessing the performance of a database system, as high latency can indicate bottlenecks and slow performance.'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -287,8 +373,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-            - tag: test
-              value: test
+            - tag: component
+              value: DFS
         - uuid: 166510803335410991d6ce07001613af
           name: 'DFS Replicated Folders (RDC Bytes Received)'
           key: 'perf_counter_en[\DFS Replicated Folders(*)\RDC Bytes Received]'
@@ -298,8 +384,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-            - tag: test
-              value: test
+            - tag: component
+              value: DFS
         - uuid: 5830f88357dd402dbb0fc569c2583e89
           name: 'DFS Replicated Folders (Size of Files Received)'
           key: 'perf_counter_en[\DFS Replicated Folders(*)\Size of Files Received]'
@@ -309,8 +395,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-            - tag: test
-              value: test
+            - tag: component
+              value: DFS
         - uuid: c0e15e6a5af64d7ba001eaa5b389cee9
           name: 'DFS Replicated Folders (Staging Space In Use)'
           key: 'perf_counter_en[\DFS Replicated Folders(*)\Staging Space In Use]'
@@ -324,8 +410,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-            - tag: test
-              value: test
+            - tag: component
+              value: DFS
         - uuid: 751a5e1b5a304c96a0061c6c7c6540b9
           name: 'DFS Replicated Folders (Total Files Received)'
           key: 'perf_counter_en[\DFS Replicated Folders(*)\Total Files Received]'
@@ -335,28 +421,53 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-            - tag: test
-              value: test
+            - tag: component
+              value: DFS
         - uuid: 9017a9f8b3c04e1789e414fc25898476
           name: 'DFS Replication Connections (Bytes Received Per Second)'
-          key: 'perf_counter_en[\DFS Replication Connections(*)\Bytes Received Per Second]'
+          key: 'perf_counter_en[\DFS Replication Connections\Bytes Received Per Second]'
           delay: 5m
           history: 1w
           value_type: FLOAT
           tags:
             - tag: Application
               value: 'AD DS Performance'
-            - tag: test
-              value: test
+            - tag: component
+              value: DFS
+        - uuid: 640a13b4b62a4a228a52bfc9f0b98c99
+          name: 'ATQ Outstanding queued requests total'
+          key: 'perf_counter_en[\DirectoryServices(NTDS)\ATQ Outstanding Queued Requests]'
+          history: 1w
+          value_type: FLOAT
+          description: 'Current number of requests in the queue'
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+            - tag: component
+              value: ATQ
+        - uuid: f65a5ee4bc224698b96574255511293f
+          name: 'ATQ Threads total'
+          key: 'perf_counter_en[\DirectoryServices(NTDS)\ATQ Threads Total]'
+          history: 1w
+          value_type: FLOAT
+          description: 'All Threads currently allocated'
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+            - tag: component
+              value: ATQ
         - uuid: 94f2463710d3452395bb03bcc8d8f6b4
           name: 'LDAP Bind time'
           key: 'perf_counter_en[\DirectoryServices(NTDS)\LDAP Bind Time]'
           history: 1w
           value_type: FLOAT
           units: ms
+          description: 'LDAP bind time refers to the duration it takes for a client to establish a connection with an LDAP server for authentication. It''s a crucial performance metric that indicates the server''s responsiveness and can impact user experience and overall directory service performance.'
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
           triggers:
             - uuid: 7752639475134393b68b84abe8a63845
               expression: 'min(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\LDAP Bind Time],5m)>20'
@@ -371,6 +482,7 @@ zabbix_export:
           key: 'perf_counter_en[\DirectoryServices(NTDS)\Simple Binds/sec]'
           history: 1w
           units: /s
+          description: 'In LDAP, a simple bind is a basic method of authentication where a client provides a distinguished name (DN) and password to the server, which then verifies these credentials.'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -382,17 +494,14 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: DNS
           triggers:
             - uuid: 917b85b5c5434af8b566f192e919aa41
               expression: 'max(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],#3)>5000'
               name: 'DNS Total Query Received/sec >5000'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: AVERAGE
-            - uuid: 26fe1eb903814ec7b226df239ee0f949
-              expression: 'max(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],#3)>{$DNS.TOTAL.RECEIVED.MAX.WARN}'
-              name: 'DNS Total Query Received/sec is too high'
-              opdata: 'Current value: {ITEM.LASTVALUE1}'
-              priority: WARNING
         - uuid: ee208fb7ec8741a4a9ed0dda0c06759d
           name: 'DNS Total Response Sent/sec'
           key: 'perf_counter_en[\DNS\Total Response Sent/sec]'
@@ -401,6 +510,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: DNS
         - uuid: bc2630cd94024fefa3bfefc9b3050606
           name: 'DNS UDP Query Received/sec'
           key: 'perf_counter_en[\DNS\UDP Query Received/sec]'
@@ -409,6 +520,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: DNS
         - uuid: 7df8baf26b5448dd810f00bee13eebe0
           name: 'DNS UDP Response Sent/sec'
           key: 'perf_counter_en[\DNS\UDP Response Sent/sec]'
@@ -417,6 +530,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: DNS
         - uuid: eef53313a77a4640a2c6aca1d295ddc1
           name: 'Netlogon Average Semaphore Hold Time'
           key: 'perf_counter_en[\Netlogon(_Total)\Average Semaphore Hold Time]'
@@ -497,6 +612,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: 27650f6d58c64c0bb07354ec74d636e9
           name: 'LDAP Client Sessions'
           key: 'perf_counter_en[\NTDS\LDAP Client Sessions]'
@@ -505,12 +622,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
-          triggers:
-            - uuid: 4a768cc34fc84e1aba5f8c07c622550e
-              expression: 'max(/AD DS Health and Performance/perf_counter_en[\NTDS\LDAP Client Sessions],#3)>{$LDAP.CLIENT.SESSIONS.WARN}'
-              name: 'LDAP Client Sessions more {$LDAP.CLIENT.SESSIONS.WARN}'
-              opdata: 'Current value: {ITEM.LASTVALUE1}'
-              priority: AVERAGE
+            - tag: component
+              value: LDAP
         - uuid: 6a7ff5ef860a490b8b1bfd4b3a4cc0a2
           name: 'LDAP New Connections/sec'
           key: 'perf_counter_en[\NTDS\LDAP New Connections/sec]'
@@ -520,6 +633,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: 2126892ecadd4995aef19854dec4a912
           name: 'LDAP New SSL Connections/sec'
           key: 'perf_counter_en[\NTDS\LDAP New SSL Connections/sec]'
@@ -529,6 +644,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: 0a0508bd91f146669482a2bdc45749a7
           name: 'LDAP Searches/sec'
           key: 'perf_counter_en[\NTDS\LDAP Searches/sec]'
@@ -539,6 +656,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: fb193d229d3b4757b289c8ad40f09b1a
           name: 'LDAP Writes/sec'
           key: 'perf_counter_en[\NTDS\LDAP Writes/sec]'
@@ -548,6 +667,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: 74f30bad16e44877a869105e6f8bcc52
           name: 'LSASS Processor Time'
           key: 'perf_counter_en[\Process(lsass)\% Processor Time]'
@@ -580,6 +701,20 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+        - uuid: 7e55a1f023fd481787310d6836caa828
+          name: 'Windows Time Computed Time Offset'
+          key: 'perf_counter_en[\Windows Time Service\Computed Time Offset]'
+          history: 1w
+          value_type: FLOAT
+          description: 'The absolute time offset between the system clock and the chosen time source, as computed by the W32Time service in microseconds. When a new valid sample is available, the computed time is updated with the time offset indicated by the sample. This time is the actual time offset of the local clock. W32Time initiates clock correction by using this offset and updates the computed time in between samples with the remaining time offset that needs to be applied to the local clock. Clock accuracy can be tracked by using this performance counter with a low polling interval (for example, 256 seconds or less) and looking for the counter value to be smaller than the desired clock accuracy limit.'
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+          triggers:
+            - uuid: 626006ec90594974a48200474a64124d
+              expression: 'min(/AD DS Health and Performance/perf_counter_en[\Windows Time Service\Computed Time Offset],5m)>100000000'
+              name: 'Time Offset from Source is > 1 minute on host {HOST.NAME}'
+              priority: AVERAGE
         - uuid: e007b544233a44be9ed85e44dfac372e
           name: 'State of service "ADWS" (Active Directory Web Services)'
           key: 'service.info[ADWS,state]'
@@ -604,6 +739,8 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Services'
+            - tag: component
+              value: DFS
           triggers:
             - uuid: 371ead681bae4929b73b4d65226bc082
               expression: 'min(/AD DS Health and Performance/service.info[DFSR,state],#3)<>0'
@@ -618,7 +755,9 @@ zabbix_export:
             name: 'Windows service state'
           tags:
             - tag: Application
-              value: 'AD DS Services'
+              value: 'AD DS Performance'
+            - tag: component
+              value: DNS
           triggers:
             - uuid: 9097e62875fb45a7bf1b9f79d5156239
               expression: 'min(/AD DS Health and Performance/service.info[DNS,state],#3)<>0'
@@ -633,7 +772,9 @@ zabbix_export:
             name: 'Windows service state'
           tags:
             - tag: Application
-              value: 'AD DS Services'
+              value: 'AD DS Performance'
+            - tag: component
+              value: DNS
           triggers:
             - uuid: 5a10432749cd4a7ab6f8d192bb5bd222
               expression: 'min(/AD DS Health and Performance/service.info[Dnscache,state],#3)<>0'
@@ -896,6 +1037,17 @@ zabbix_export:
               display_period: '60'
               widgets:
                 - type: GRAPH_CLASSIC
+                  name: 'LDAP Client Sessions'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: 'LDAP Sessions'
+                - type: GRAPH_CLASSIC
+                  'y': '5'
                   width: '12'
                   height: '5'
                   fields:
@@ -905,8 +1057,8 @@ zabbix_export:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Statistics'
                 - type: GRAPH_CLASSIC
-                  name: 'LDAP Bind Time'
-                  'y': '5'
+                  name: 'Simple Binds/sec'
+                  'y': '10'
                   width: '12'
                   height: '5'
                   fields:
@@ -914,7 +1066,7 @@ zabbix_export:
                       name: graphid
                       value:
                         host: 'AD DS Health and Performance'
-                        name: 'LDAP Bind Time'
+                        name: 'Simple Binds'
                 - type: GRAPH_CLASSIC
                   x: '12'
                   width: '12'
@@ -926,7 +1078,7 @@ zabbix_export:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Statistics of Connections Type'
                 - type: GRAPH_CLASSIC
-                  name: 'Simple Binds/sec'
+                  name: 'LDAP Bind Time'
                   x: '12'
                   'y': '5'
                   width: '12'
@@ -936,7 +1088,38 @@ zabbix_export:
                       name: graphid
                       value:
                         host: 'AD DS Health and Performance'
-                        name: 'Simple Binds'
+                        name: 'LDAP Bind Time'
+            - name: Database
+              widgets:
+                - type: GRAPH_CLASSIC
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: 'AD DS DB and Log Size'
+                - type: GRAPH_CLASSIC
+                  'y': '5'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: 'Database ==> Instances Statistics'
+                - type: GRAPH_CLASSIC
+                  x: '12'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: 'Database ==> Instances Statistics'
             - name: NetLogon
               widgets:
                 - type: GRAPH_CLASSIC
@@ -997,6 +1180,18 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DFS Replicated Folders (Space In Use)'
+            - name: ATQ
+              widgets:
+                - type: GRAPH_CLASSIC
+                  name: 'ATQ Threads'
+                  width: '12'
+                  height: '5'
+                  fields:
+                    - type: GRAPH
+                      name: graphid
+                      value:
+                        host: 'AD DS Health and Performance'
+                        name: ATQ
       valuemaps:
         - uuid: 7d7a9ff770b0415781bbc49c400a60ed
           name: 'Service state'
@@ -1026,6 +1221,22 @@ zabbix_export:
               newvalue: Unknown
             - value: '255'
               newvalue: 'No such service'
+  triggers:
+    - uuid: dc5d6b0bc85f4a0a8243b821597d9537
+      expression: 'avg(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\ATQ Threads Total],15m)>=last(/AD DS Health and Performance/ATQThreadsMax)'
+      name: 'ATQ Thread Exhaustion on host {HOST.NAME}'
+      url: 'https://techcommunity.microsoft.com/blog/askds/understanding-atq-performance-counters-yet-another-twist-in-the-world-of-tlas/400293'
+      priority: AVERAGE
+    - uuid: 26fe1eb903814ec7b226df239ee0f949
+      expression: 'max(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],#3)>last(/AD DS Health and Performance/dns.query.rec.avg7d)'
+      name: 'DNS Total Query Received/sec is anomalously high on {HOST.NAME}'
+      opdata: 'Current value: {ITEM.LASTVALUE1}'
+      priority: WARNING
+    - uuid: 4a768cc34fc84e1aba5f8c07c622550e
+      expression: 'max(/AD DS Health and Performance/perf_counter_en[\NTDS\LDAP Client Sessions],#3)>last(/AD DS Health and Performance/ldap.client.session.avg7d)'
+      name: 'LDAP Client Sessions more than baseline on {HOST.NAME}'
+      opdata: 'Current value: {ITEM.LASTVALUE1}'
+      priority: AVERAGE
   graphs:
     - uuid: e0e4a9ff9ece4fa6b353ea55412f6763
       name: 'AD DS Authentications'
@@ -1053,6 +1264,22 @@ zabbix_export:
           item:
             host: 'AD DS Health and Performance'
             key: 'vfs.file.size["{$ADLOG_PATH}"]'
+    - uuid: 2366b81f36ae4167bf5e0429c0369032
+      name: ATQ
+      ymin_type_1: FIXED
+      graph_items:
+        - color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: 'perf_counter_en[\DirectoryServices(NTDS)\ATQ Threads Total]'
+        - sortorder: '1'
+          drawtype: DASHED_LINE
+          color: CC6600
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: ATQThreadsMax
     - uuid: 0344f169f0c84af2be15aa0ef5f2609a
       name: 'Bandwidth usage (SYSVOL)'
       ymin_type_1: FIXED
@@ -1061,7 +1288,7 @@ zabbix_export:
           calc_fnc: ALL
           item:
             host: 'AD DS Health and Performance'
-            key: 'perf_counter_en[\DFS Replication Connections(*)\Bytes Received Per Second]'
+            key: 'perf_counter_en[\DFS Replication Connections\Bytes Received Per Second]'
     - uuid: d2bf271b0e4d4a33af6ffb19f8e289f2
       name: 'Database ==> Instances Statistics'
       ymin_type_1: FIXED
@@ -1130,6 +1357,13 @@ zabbix_export:
           item:
             host: 'AD DS Health and Performance'
             key: 'perf_counter_en[\DNS\UDP Response Sent/sec]'
+        - sortorder: '4'
+          drawtype: DASHED_LINE
+          color: CC6600
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: dns.query.rec.avg7d
     - uuid: 8abeb5f241e14635a3ba13d12fed6b07
       name: 'DRA Statistics'
       ymin_type_1: FIXED
@@ -1164,8 +1398,8 @@ zabbix_export:
           item:
             host: 'AD DS Health and Performance'
             key: 'perf_counter_en[\DirectoryServices(NTDS)\LDAP Bind Time]'
-    - uuid: 2833f9419ee542f794a3d78a22761661
-      name: 'LDAP Statistics'
+    - uuid: 464fbf8472d24a5a9ee2865b5313a0d3
+      name: 'LDAP Sessions'
       ymin_type_1: FIXED
       graph_items:
         - color: 1A7C11
@@ -1174,12 +1408,22 @@ zabbix_export:
             host: 'AD DS Health and Performance'
             key: 'perf_counter_en[\NTDS\LDAP Client Sessions]'
         - sortorder: '1'
-          color: F63100
+          drawtype: DASHED_LINE
+          color: CC6600
+          calc_fnc: ALL
+          item:
+            host: 'AD DS Health and Performance'
+            key: ldap.client.session.avg7d
+    - uuid: 2833f9419ee542f794a3d78a22761661
+      name: 'LDAP Statistics'
+      ymin_type_1: FIXED
+      graph_items:
+        - color: F63100
           calc_fnc: ALL
           item:
             host: 'AD DS Health and Performance'
             key: 'perf_counter_en[\NTDS\LDAP Searches/sec]'
-        - sortorder: '2'
+        - sortorder: '1'
           color: 2774A4
           calc_fnc: ALL
           item:
