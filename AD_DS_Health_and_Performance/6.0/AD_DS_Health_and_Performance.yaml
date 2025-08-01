@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2025-07-31T13:02:28Z'
+  date: '2025-08-01T06:29:56Z'
   groups:
     - uuid: b9390195ecad4986968746a2a9b56354
       name: 'My Templates'
@@ -9,7 +9,7 @@ zabbix_export:
       template: 'AD DS Health and Performance'
       name: 'AD DS Health and Performance'
       description: |
-        Template tooling version used: 2.10
+        Template tooling version used: 2.11
         
         https://github.com/NikonovAleksei/zabbix/
         
@@ -34,7 +34,7 @@ zabbix_export:
           name: 'Baseline - DNS Total Query Received/sec'
           type: CALCULATED
           key: dns.query.rec.avg7d
-          delay: 30m
+          delay: 1d
           history: 1w
           value_type: FLOAT
           params: '1.1*max(//perf_counter_en[\DNS\Total Query Received/sec],7d)'
@@ -205,7 +205,7 @@ zabbix_export:
           name: 'Baseline - LDAP Client Sessions'
           type: CALCULATED
           key: ldap.client.session.avg7d
-          delay: 30m
+          delay: 1d
           history: 1w
           value_type: FLOAT
           params: '1.1*max(//perf_counter_en[\NTDS\LDAP Client Sessions],7d)'

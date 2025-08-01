@@ -1,5 +1,13 @@
 # Changelog 
 
+## 2.11
+Updated:
+
+### Items
+- Baseline - DNS Total Query Received/sec
+- Baseline - LDAP Client Sessions
+
+
 ## 2.10
 Added \ Updated:
 
