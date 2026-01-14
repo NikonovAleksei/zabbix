@@ -1,7 +1,6 @@
 zabbix_export:
-  version: '6.0'
-  date: '2026-01-13T13:39:01Z'
-  groups:
+  version: '7.0'
+  template_groups:
     - uuid: b9390195ecad4986968746a2a9b56354
       name: 'My Templates'
   templates:
@@ -76,8 +75,8 @@ zabbix_export:
           key: 'eventlog[Active Directory Web Services,,"Warning|Error|Critical"]'
           delay: 5m
           history: 1w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Events'
@@ -92,8 +91,8 @@ zabbix_export:
           key: 'eventlog[DFS Replication,,"Warning|Error|Critical"]'
           delay: 5m
           history: 1w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Events'
@@ -110,8 +109,8 @@ zabbix_export:
           key: 'eventlog[Directory Service,,"Warning|Error|Critical"]'
           delay: 5m
           history: 1w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Events'
@@ -149,8 +148,8 @@ zabbix_export:
           key: 'eventlog[DNS Server,,"Warning|Error|Critical"]'
           delay: 5m
           history: 1w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -171,8 +170,9 @@ zabbix_export:
           type: ZABBIX_ACTIVE
           key: 'eventlog[Microsoft-Windows-Backup,,"Information|Error",,^(4|5)$]'
           delay: 5m
-          trends: '0'
+          history: 90d
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Events'
@@ -193,8 +193,8 @@ zabbix_export:
           key: 'eventlog[System,"Time-Service","Warning|Error|Critical"]'
           delay: 5m
           history: 1w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Events'
@@ -218,8 +218,8 @@ zabbix_export:
           key: 'eventlog[System,,"Error","NETLOGON",^5723$]'
           delay: 5m
           history: 1w
-          trends: '0'
           value_type: LOG
+          trends: '0'
           tags:
             - tag: Application
               value: 'AD DS Events'
@@ -233,8 +233,9 @@ zabbix_export:
           type: ZABBIX_ACTIVE
           key: 'log[c:\windows\debug\netlogon.log,"NO_CLIENT_SITE",,,skip,,,]'
           delay: 5m
-          trends: '0'
+          history: 90d
           value_type: LOG
+          trends: '0'
           logtimefmt: 'MM/ddphh:mm:ss'
           tags:
             - tag: Application
@@ -1067,8 +1068,8 @@ zabbix_export:
           pages:
             - name: Main
               widgets:
-                - type: GRAPH_CLASSIC
-                  width: '12'
+                - type: graph
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1076,9 +1077,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'AD DS DB and Log Size'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAA
+                - type: graph
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1086,9 +1090,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'AD DS Authentications'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAB
+                - type: graph
                   'y': '10'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1096,9 +1103,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DNS Statistics'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAC
+                - type: graph
                   'y': '15'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1106,9 +1116,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'Database ==> Instances Statistics'
-                - type: GRAPH_CLASSIC
-                  x: '12'
-                  width: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAD
+                - type: graph
+                  x: '36'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1116,10 +1129,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LSASS Processor Time & Memmory'
-                - type: GRAPH_CLASSIC
-                  x: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAE
+                - type: graph
+                  x: '36'
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1127,10 +1143,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Statistics'
-                - type: GRAPH_CLASSIC
-                  x: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAF
+                - type: graph
+                  x: '36'
                   'y': '10'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1138,10 +1157,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DRA Statistics'
+                    - type: STRING
+                      name: reference
+                      value: AAAAG
             - name: Database
               widgets:
-                - type: GRAPH_CLASSIC
-                  width: '12'
+                - type: graph
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1149,9 +1171,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'Database ==> Instances Statistics'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAH
+                - type: graph
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1159,9 +1184,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'AD DS DB and Log Size'
-                - type: GRAPH_CLASSIC
-                  x: '12'
-                  width: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAI
+                - type: graph
+                  x: '36'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1169,12 +1197,15 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DRA Statistics'
+                    - type: STRING
+                      name: reference
+                      value: AAAAJ
             - name: 'LDAP Statistics'
               display_period: '60'
               widgets:
-                - type: GRAPH_CLASSIC
+                - type: graph
                   name: 'LDAP Client Sessions'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1182,9 +1213,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Sessions'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAK
+                - type: graph
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1192,10 +1226,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Statistics'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAL
+                - type: graph
                   name: 'Simple Binds/sec'
                   'y': '10'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1203,9 +1240,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'Simple Binds'
-                - type: GRAPH_CLASSIC
-                  x: '12'
-                  width: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAM
+                - type: graph
+                  x: '36'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1213,11 +1253,14 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Statistics of Connections Type'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAN
+                - type: graph
                   name: 'LDAP Bind Time'
-                  x: '12'
+                  x: '36'
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1225,10 +1268,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'LDAP Bind Time'
+                    - type: STRING
+                      name: reference
+                      value: AAAAO
             - name: DNS
               widgets:
-                - type: GRAPH_CLASSIC
-                  width: '12'
+                - type: graph
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1236,9 +1282,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DNS Statistics'
-                - type: GRAPH_CLASSIC
+                    - type: STRING
+                      name: reference
+                      value: AAAAP
+                - type: graph
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1246,9 +1295,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DNS response time'
-                - type: GRAPH_CLASSIC
-                  x: '12'
-                  width: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAQ
+                - type: graph
+                  x: '36'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1256,10 +1308,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DNS Dynamic updates'
+                    - type: STRING
+                      name: reference
+                      value: AAAAR
             - name: NetLogon
               widgets:
-                - type: GRAPH_CLASSIC
-                  width: '12'
+                - type: graph
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1267,9 +1322,12 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: NetLogon
-                - type: GRAPH_CLASSIC
-                  x: '12'
-                  width: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAS
+                - type: graph
+                  x: '36'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1277,11 +1335,14 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'AD DS Authentications'
+                    - type: STRING
+                      name: reference
+                      value: AAAAT
             - name: DFSR
               widgets:
-                - type: GRAPH_CLASSIC
+                - type: graph
                   name: 'SYSVOL size'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: ITEM
@@ -1289,15 +1350,18 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         key: 'vfs.dir.size["{$ADSYSVOL_PATH}"]'
+                    - type: STRING
+                      name: reference
+                      value: AAAAU
                     - type: INTEGER
                       name: show_legend
                       value: '0'
                     - type: INTEGER
                       name: source_type
                       value: '1'
-                - type: GRAPH_CLASSIC
-                  x: '12'
-                  width: '12'
+                - type: graph
+                  x: '36'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1305,10 +1369,13 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'DFS Replicated Folders (Space In Use)'
-                - type: GRAPH_CLASSIC
-                  x: '12'
+                    - type: STRING
+                      name: reference
+                      value: AAAAV
+                - type: graph
+                  x: '36'
                   'y': '5'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1316,11 +1383,14 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: 'Bandwidth usage by SYSVOL'
+                    - type: STRING
+                      name: reference
+                      value: AAAAW
             - name: ATQ
               widgets:
-                - type: GRAPH_CLASSIC
+                - type: graph
                   name: 'ATQ Threads'
-                  width: '12'
+                  width: '36'
                   height: '5'
                   fields:
                     - type: GRAPH
@@ -1328,6 +1398,9 @@ zabbix_export:
                       value:
                         host: 'AD DS Health and Performance'
                         name: ATQ
+                    - type: STRING
+                      name: reference
+                      value: AAAAX
       valuemaps:
         - uuid: 7d7a9ff770b0415781bbc49c400a60ed
           name: 'Service state'
