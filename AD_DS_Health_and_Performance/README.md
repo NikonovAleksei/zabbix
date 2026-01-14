@@ -1,7 +1,7 @@
 # Changelog 
 ## 2.12
 
-###Added
+### Added
 - Baseline - DS Directory Searches/sec (baseline-dependent)
 - DS Directory Searches/sec
 - DRA Pending Replication Operations
@@ -11,13 +11,13 @@
 - LSASS Memory
 - Netlogon Last Authentication Time
 
-###Changed
+### Changed
 - LSASS Processor Time
 - Baseline - DNS Total Query Received/sec (baseline-dependent)
 - Baseline - LDAP Client Sessions (baseline-dependent)
 - *DFS Replication Connections (Bytes Received Per Second)
 
-###Operational note:
+### Operational note:
 Allow 24–48 hours after deployment for baseline values to stabilize before evaluating anomalies or alerts.
 
 ## 2.11
