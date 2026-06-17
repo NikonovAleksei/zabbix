@@ -37,3 +37,13 @@ Template based on MS documents:
 - Template Windows RDS Gateway
 - Template Windows RDS Licensing
 - Template Windows RDS Session
+
+## Star History
+
+<a href="https://www.star-history.com/#Runnin4ik/dpi-detector&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=nikonovaleksei/zabbix&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=nikonovaleksei/zabbix&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=nikonovaleksei/zabbix&type=date&legend=top-left" />
+ </picture>
+</a>
