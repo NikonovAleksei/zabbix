@@ -1,20 +1,20 @@
 zabbix_export:
   version: '7.0'
   template_groups:
-    - uuid: b9390195ecad4986968746a2a9b56354
-      name: 'My Templates'
+    - uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
   templates:
     - uuid: 01548d1b601f4732b8b26c229305e5bf
       template: 'AD DS Health and Performance'
       name: 'AD DS Health and Performance'
       description: |
-        Template tooling version used: 2.12
+        Template tooling version used: 2.13
         
         https://github.com/NikonovAleksei/zabbix/
         
         https://t.me/ad_zabbix_templates
       groups:
-        - name: 'My Templates'
+        - name: Templates
       items:
         - uuid: 02053db91d1049bbae17151422d2a5e0
           name: 'ATQ Threads Max'
@@ -36,7 +36,7 @@ zabbix_export:
           delay: 1d
           history: 1w
           value_type: FLOAT
-          params: '1.1*max(//perf_counter_en[\DNS\Total Query Received/sec],7d)'
+          params: 'avg(//perf_counter_en[\DNS\Total Query Received/sec],7d)'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -50,7 +50,7 @@ zabbix_export:
           history: 1w
           value_type: FLOAT
           units: /sec
-          params: '1.1*max(//perf_counter_en["\DirectoryServices(*)\DS Directory Searches/sec"],7d)'
+          params: 'avg(//perf_counter_en["\DirectoryServices(*)\DS Directory Searches/sec"],7d)'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -63,7 +63,7 @@ zabbix_export:
           delay: 1d
           history: 1w
           value_type: FLOAT
-          params: '1.1*max(//perf_counter_en[\NTDS\LDAP Client Sessions],7d)'
+          params: 'avg(//perf_counter_en[\NTDS\LDAP Client Sessions],7d)'
           tags:
             - tag: Application
               value: 'AD DS Performance'
@@ -161,7 +161,7 @@ zabbix_export:
               name: 'DNS Server Events Error on {HOST.NAME}'
               status: DISABLED
             - uuid: e565c96b940c4ef0bb7b4b500678a98b
-              expression: 'logseverity(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"])=2 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],600s)=0 and logeventid(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],,"4515")=0'
+              expression: 'logseverity(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"])=2 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],600s)=0 and logeventid(/AD DS Health and Performance/eventlog[DNS Server,,"Warning|Error|Critical"],,"4515")=1'
               name: 'Duplicate DNS zones were detected on {HOST.NAME}'
               url: 'https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc735755(v=ws.10)?redirectedfrom=MSDN'
               priority: WARNING
@@ -258,6 +258,20 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+        - uuid: 6adacd5afd224099bdf072060854d67e
+          name: 'Kerberos Port 88'
+          key: 'net.tcp.listen[88]'
+          history: 1w
+          valuemap:
+            name: 'Service state'
+          tags:
+            - tag: Application
+              value: 'AD DS Network ports'
+          triggers:
+            - uuid: d30e3339d95848f1984d6f6b052114ba
+              expression: 'last(/AD DS Health and Performance/net.tcp.listen[88],#3)=0'
+              name: 'Kerberos (88) port is unavailable'
+              priority: AVERAGE
         - uuid: f13c111c5669475da6862558389d5174
           name: 'LDAP Port 389'
           key: 'net.tcp.listen[389]'
@@ -269,6 +283,11 @@ zabbix_export:
               value: 'AD DS Network ports'
             - tag: component
               value: LDAP
+          triggers:
+            - uuid: 658a97180a5e428c90ad69076c376535
+              expression: 'last(/AD DS Health and Performance/net.tcp.listen[389],#3)=0'
+              name: 'LDAP port is unavailable'
+              priority: AVERAGE
         - uuid: 539c7e58919c4969ad3400a8aa39d548
           name: 'Kerberos Port 464'
           key: 'net.tcp.listen[464]'
@@ -278,8 +297,13 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Network ports'
+          triggers:
+            - uuid: 997b1035ea5748d29ae6062706893021
+              expression: 'last(/AD DS Health and Performance/net.tcp.listen[464],#3)=0'
+              name: 'Kerberos (464) port is unavailable'
+              priority: AVERAGE
         - uuid: 5bf4d465cc8149abaf8c6c03277f5e81
-          name: 'LDAPS Port 636'
+          name: 'LDAP SSL Port 636'
           key: 'net.tcp.listen[636]'
           history: 1w
           valuemap:
@@ -289,6 +313,11 @@ zabbix_export:
               value: 'AD DS Network ports'
             - tag: component
               value: LDAP
+          triggers:
+            - uuid: e64352fe9f8d441592645ab94699ed7e
+              expression: 'last(/AD DS Health and Performance/net.tcp.listen[636],#3)=0'
+              name: 'LDAPS port is unavailable'
+              priority: AVERAGE
         - uuid: 718d90c8fde049e69ad2cb7ddb5fe937
           name: 'Global Catalog Port 3268'
           key: 'net.tcp.listen[3268]'
@@ -298,8 +327,13 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Network ports'
+          triggers:
+            - uuid: cf3c2396f4854f7d8e33836fe0e9f0e9
+              expression: 'last(/AD DS Health and Performance/net.tcp.listen[3268],#3)=0'
+              name: 'GC port is unavailable'
+              priority: AVERAGE
         - uuid: f768630a78a647d78cf209529bfcd92c
-          name: 'Global Catalog Port 3269'
+          name: 'Global Catalog SSL Port 3269'
           key: 'net.tcp.listen[3269]'
           history: 1w
           valuemap:
@@ -307,6 +341,11 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Network ports'
+          triggers:
+            - uuid: 755ec75048574e4c95e587b64bf76b44
+              expression: 'last(/AD DS Health and Performance/net.tcp.listen[3269],#3)=0'
+              name: 'GC SSL port is unavailable'
+              priority: AVERAGE
         - uuid: 05dd97afcc47417aaa6b3c4c257ff19c
           name: 'DS Directory Searches/sec'
           key: 'perf_counter_en["\DirectoryServices(*)\DS Directory Searches/sec"]'
@@ -503,6 +542,9 @@ zabbix_export:
               expression: 'min(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\LDAP Bind Time],5m)>20'
               name: 'LDAP Bind Time > 20ms on {HOST.NAME}'
               priority: WARNING
+              dependencies:
+                - name: 'LDAP Bind Time > 30ms on {HOST.NAME}'
+                  expression: 'min(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\LDAP Bind Time],5m)>30'
             - uuid: 721183e283f04b3185bc08dcaba5ffca
               expression: 'min(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\LDAP Bind Time],5m)>30'
               name: 'LDAP Bind Time > 30ms on {HOST.NAME}'
@@ -697,6 +739,17 @@ zabbix_export:
           tags:
             - tag: Application
               value: 'AD DS Performance'
+        - uuid: 6574761e613640be8fdcbb905a352fc1
+          name: 'LDAP Search Load'
+          key: 'perf_counter_en[\NTDS\DS Search sub-operations/sec]'
+          history: 1w
+          value_type: FLOAT
+          units: /sec
+          tags:
+            - tag: Application
+              value: 'AD DS Performance'
+            - tag: component
+              value: LDAP
         - uuid: fe58cbd89ba94e34a70e09603bfda810
           name: 'LDAP Active Threads'
           key: 'perf_counter_en[\NTDS\LDAP Active Threads]'
@@ -821,6 +874,22 @@ zabbix_export:
               expression: 'min(/AD DS Health and Performance/perf_counter_en[\Windows Time Service\Computed Time Offset],5m)>100000000'
               name: 'Time Offset from Source is > 1 minute on host {HOST.NAME}'
               priority: AVERAGE
+        - uuid: 90fe2e1b94bf43fd979674d5d487d8d7
+          name: 'NTDS Log Path'
+          type: ZABBIX_ACTIVE
+          key: 'registry.data["HKLM\SYSTEM\CurrentControlSet\Services\NTDS\Parameters","Database log files path"]'
+          delay: 720m
+          history: 7d
+          value_type: TEXT
+          trends: '0'
+        - uuid: ef7cf88008bb4a0b9d68ff0c61db13f1
+          name: 'NTDS DB Path'
+          type: ZABBIX_ACTIVE
+          key: 'registry.data["HKLM\SYSTEM\CurrentControlSet\Services\NTDS\Parameters","DSA Database file"]'
+          delay: 720m
+          history: 7d
+          value_type: TEXT
+          trends: '0'
         - uuid: e007b544233a44be9ed85e44dfac372e
           name: 'State of service "ADWS" (Active Directory Web Services)'
           key: 'service.info[ADWS,state]'
@@ -1436,26 +1505,37 @@ zabbix_export:
       name: 'ATQ Thread Exhaustion on host {HOST.NAME}'
       url: 'https://techcommunity.microsoft.com/blog/askds/understanding-atq-performance-counters-yet-another-twist-in-the-world-of-tlas/400293'
       priority: WARNING
+      dependencies:
+        - name: 'ATQ Thread Exhaustion on host {HOST.NAME}'
+          expression: 'avg(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\ATQ Threads Total],15m)>last(/AD DS Health and Performance/ATQThreadsMax)'
     - uuid: e0cec44bd54c47029baedd93a3243c62
       expression: 'avg(/AD DS Health and Performance/perf_counter_en[\DirectoryServices(NTDS)\ATQ Threads Total],15m)>last(/AD DS Health and Performance/ATQThreadsMax)'
       name: 'ATQ Thread Exhaustion on host {HOST.NAME}'
       url: 'https://techcommunity.microsoft.com/blog/askds/understanding-atq-performance-counters-yet-another-twist-in-the-world-of-tlas/400293'
       priority: AVERAGE
     - uuid: 26fe1eb903814ec7b226df239ee0f949
-      expression: 'max(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],#3)>last(/AD DS Health and Performance/baseline.dns.query.rec)'
+      expression: 'avg(/AD DS Health and Performance/perf_counter_en[\DNS\Total Query Received/sec],15m)>(last(/AD DS Health and Performance/baseline.dns.query.rec))*1.95'
       name: 'DNS Total Query Received/sec is anomalously high on {HOST.NAME}'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
       priority: WARNING
     - uuid: 97d700c5d5584a00a2f555b801db045e
-      expression: 'max(/AD DS Health and Performance/perf_counter_en["\DirectoryServices(*)\DS Directory Searches/sec"],#3)>last(/AD DS Health and Performance/baseline.ds.searches)'
+      expression: 'avg(/AD DS Health and Performance/perf_counter_en["\DirectoryServices(*)\DS Directory Searches/sec"],15m)>(last(/AD DS Health and Performance/baseline.ds.searches))*1.95'
       name: 'DS Directory Searches/sec is anomalously high on {HOST.NAME}'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
       priority: WARNING
     - uuid: 4a768cc34fc84e1aba5f8c07c622550e
-      expression: 'max(/AD DS Health and Performance/perf_counter_en[\NTDS\LDAP Client Sessions],#3)>last(/AD DS Health and Performance/baseline.ldap.client.session)'
+      expression: 'avg(/AD DS Health and Performance/perf_counter_en[\NTDS\LDAP Client Sessions],15m)>(last(/AD DS Health and Performance/baseline.ldap.client.session))*1.5'
       name: 'LDAP Client Sessions is anomalously high on {HOST.NAME}'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
       priority: WARNING
+      dependencies:
+        - name: 'LDAP Client Sessions is anomalously high on {HOST.NAME}'
+          expression: 'avg(/AD DS Health and Performance/perf_counter_en[\NTDS\LDAP Client Sessions],15m)>(last(/AD DS Health and Performance/baseline.ldap.client.session))*2'
+    - uuid: 019dc3fe758042adae079a7276a0e6a5
+      expression: 'avg(/AD DS Health and Performance/perf_counter_en[\NTDS\LDAP Client Sessions],15m)>(last(/AD DS Health and Performance/baseline.ldap.client.session))*2'
+      name: 'LDAP Client Sessions is anomalously high on {HOST.NAME}'
+      opdata: 'Current value: {ITEM.LASTVALUE1}'
+      priority: AVERAGE
   graphs:
     - uuid: e0e4a9ff9ece4fa6b353ea55412f6763
       name: 'AD DS Authentications'

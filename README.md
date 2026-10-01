@@ -1,6 +1,6 @@
 # Active Directory monitoring with Zabbix  
 
-## [AD DS Health and Performance v 2.12](https://github.com/NikonovAleksei/zabbix/wiki/AD-DS-Health-and-Performance)
+## [AD DS Health and Performance v 2.13](https://github.com/NikonovAleksei/zabbix/wiki/AD-DS-Health-and-Performance)
 This template provides comprehensive health, performance, and availability monitoring for Microsoft Active Directory Domain Services (AD DS) and related DNS components.
 
 It is designed to detect service degradation, replication issues, authentication latency, resource exhaustion, and configuration anomalies that directly impact domain stability and authentication reliability.
